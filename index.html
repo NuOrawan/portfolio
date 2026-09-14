@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nu — UX/UI Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --color-bg-base: #F7F8F6;
+    --color-bg-muted: #EDEFEB;
+    --color-white: #FFFFFF;
+    --color-ink-900: #12181F;
+    --color-ink-700: #2B333C;
+    --color-ink-500: #6B7480;
+    --color-ink-300: #B7BEC6;
+    --color-accent-terracotta: #D99A7C;
+    --color-accent-seafoam: #A8CFC3;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-bg-base: #12181F;
+      --color-bg-muted: #1B222B;
+      --color-ink-900: #F7F8F6;
+      --color-ink-700: #DADFE3;
+      --color-ink-500: #9AA3AD;
+      --color-ink-300: #3A424C;
+      --color-white: #12181F;
+      /* --color-accent-terracotta / --color-accent-seafoam intentionally unchanged */
+    }
+  }
+  :root[data-theme="dark"] {
+    --color-bg-base: #12181F;
+    --color-bg-muted: #1B222B;
+    --color-ink-900: #F7F8F6;
+    --color-ink-700: #DADFE3;
+    --color-ink-500: #9AA3AD;
+    --color-ink-300: #3A424C;
+    --color-white: #12181F;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--color-bg-base); color: var(--color-ink-700); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; }
+
+  /* ---------- §6 Navigation (approved) ---------- */
+  .site-nav { position: sticky; top: 0; z-index: 50; background: var(--color-bg-base); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 20px 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
+  @media (min-width: 640px) { .nav-inner { padding: 24px 80px; } }
+  .logo-badge { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--color-ink-900); display: flex; align-items: center; justify-content: center; text-decoration: none; user-select: none; }
+  .logo-badge span { font-family: var(--font-sans); font-weight: 400; font-size: 13px; line-height: 1; color: var(--color-bg-base); }
+  .logo-badge:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .nav-links { display: flex; align-items: center; gap: 36px; margin: 0; padding: 0; list-style: none; }
+  .nav-links a { position: relative; font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; padding-bottom: 8px; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--color-ink-900); opacity: 0; transform: scaleX(0.4); transform-origin: left; transition: opacity .15s ease, transform .15s ease; }
+  .nav-links a:hover::after { opacity: .45; transform: scaleX(1); }
+  .nav-links a.is-active::after { opacity: 1; transform: scaleX(1); }
+  .nav-links a:focus-visible { outline: none; }
+  .nav-links a:focus-visible::after { opacity: 1; transform: scaleX(1); background: var(--color-accent-terracotta); height: 2px; }
+
+  main { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 640px) { main { padding: 0 80px; } }
+
+  /* ---------- Hero intro (approved Nav-component content block) ---------- */
+  .page-hero { padding: 64px 0 96px; }
+  .page-hero .eyebrow { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 20px; }
+  .page-hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.25rem, 1.6rem + 3.2vw, 4.5rem); letter-spacing: -0.5px; line-height: 1.15; color: var(--color-ink-900); margin: 0 0 24px; max-width: 16ch; text-wrap: balance; }
+  .page-hero p { font-size: 1rem; line-height: 1.6; color: var(--color-ink-700); max-width: 34rem; margin: 0; }
+
+  /* ---------- §6 Buttons (approved) ---------- */
+  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-ink-300); background: transparent; color: var(--color-ink-900); font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.5px; padding: 15px 28px; border-radius: 999px; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
+  .btn-ghost:hover { background: var(--color-ink-900); color: var(--color-bg-base); border-color: var(--color-ink-900); }
+  .btn-ghost:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+
+  /* ---------- Selected work section ---------- */
+  .section-label { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 8px; }
+
+  /* ---------- §6 Project card (approved) ---------- */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin: 32px 0 96px; }
+  .project-card { display: flex; flex-direction: column; align-items: center; border: 1px solid var(--color-ink-300); border-radius: 2px; padding: 56px 40px 40px; text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .project-card:hover { transform: translateY(-4px); border-color: var(--color-ink-900); box-shadow: 0 20px 36px -22px rgba(18, 24, 31, 0.35); }
+  .project-card:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 4px; }
+  .card-mockup-area { position: relative; width: 100%; height: 240px; margin-bottom: 36px; }
+  .card-device-monitor { position: absolute; left: 6%; top: 12%; width: 62%; transform: rotate(-3deg); z-index: 1; }
+  .card-monitor-screen { background: var(--color-ink-900); border-radius: 10px; padding: 8px 8px 16px; box-shadow: 0 24px 34px -20px rgba(18, 24, 31, 0.4); }
+  .card-monitor-stand { width: 30%; height: 10px; margin: 0 auto; background: var(--color-ink-900); border-radius: 0 0 4px 4px; }
+  .card-monitor-inner { background: var(--color-white); border-radius: 3px; aspect-ratio: 16/11; overflow: hidden; display: flex; flex-direction: column; }
+  .card-monitor-nav { height: 16%; background: var(--color-bg-muted); display: flex; align-items: center; gap: 4px; padding: 0 8%; flex: none; }
+  .card-monitor-nav span { width: 5px; height: 5px; border-radius: 50%; background: var(--color-ink-300); }
+  .card-monitor-content { flex: 1; display: flex; gap: 4%; padding: 8%; }
+  .card-monitor-block { flex: 1; border-radius: 3px; }
+  .card-device-phone-overlap { position: absolute; right: 2%; bottom: -6%; width: 26%; transform: rotate(7deg); z-index: 2; }
+  .card-device-phone-fan { position: absolute; width: 30%; top: 8%; }
+  .card-device-phone-fan.fan-1 { left: 4%; transform: rotate(-11deg); z-index: 1; }
+  .card-device-phone-fan.fan-2 { left: 35%; top: 0; transform: rotate(3deg); z-index: 3; }
+  .card-device-phone-fan.fan-3 { left: 66%; transform: rotate(12deg); z-index: 2; }
+  .card-phone-frame { background: var(--color-ink-900); border-radius: 16px; padding: 6px; box-shadow: 0 18px 28px -16px rgba(18, 24, 31, 0.4); }
+  .card-phone-screen { background: var(--color-white); border-radius: 11px; aspect-ratio: 9/18.5; position: relative; overflow: hidden; padding: 12% 10%; display: flex; flex-direction: column; gap: 8%; }
+  .card-phone-notch { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 26%; height: 3%; border-radius: 3px; background: var(--color-ink-300); }
+  .card-row-dot { display: flex; align-items: center; gap: 6%; }
+  .card-row-dot .dot { width: 16%; aspect-ratio: 1; border-radius: 50%; flex: none; }
+  .card-row-dot .line { height: 12%; border-radius: 2px; flex: 1; }
+  .card-phone-line { height: 8%; border-radius: 2px; }
+  .card-phone-fill { border-radius: 4px; flex: none; }
+  .card-phone-ring { width: 44%; aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--color-accent-terracotta); margin: auto; }
+  .card-title { font-family: var(--font-display); font-weight: 400; font-size: 1.625rem; color: var(--color-ink-900); margin: 0 0 12px; text-align: center; }
+  .card-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0; text-align: center; }
+
+  /* ---------- Contact section (approved Nav-component placeholder, real copy) ---------- */
+  .contact-section { padding: 0 0 120px; border-top: 1px solid var(--color-ink-300); padding-top: 80px; }
+  .contact-section h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.75rem, 1.4rem + 2vw, 3rem); letter-spacing: -0.25px; line-height: 1.15; color: var(--color-ink-900); margin: 0 0 20px; }
+  .contact-section p { font-size: 1rem; line-height: 1.6; color: var(--color-ink-700); max-width: 34rem; margin: 0 0 32px; }
+
+  /* ---------- Theme toggle (approved — appears on every §6 component artifact) ---------- */
+  .theme-toggle { justify-self: center; font-family: var(--font-sans); font-weight: 500; font-size: 0.8125rem; color: var(--color-ink-900); background: var(--color-bg-muted); border: 1px solid var(--color-ink-300); border-radius: 20px; padding: 8px 16px; cursor: pointer; }
+  .theme-toggle:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="logo-badge" href="index.html" aria-label="Nu — home"><span>nu</span></a>
+    <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="is-active">Work</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <p class="eyebrow">UX/UI Designer — Branding</p>
+    <h1>Hi, I'm Nu.<br>I design calm, human software.</h1>
+    <p>Selected case studies below — a mix of consumer product and branding work, built around the same calm, editorial design system throughout.</p>
+  </section>
+
+  <section id="work">
+    <p class="section-label">Selected Work</p>
+    <div class="card-grid">
+      <!-- Mirror -->
+      <a class="project-card" href="#">
+        <div class="card-mockup-area">
+          <div class="card-device-monitor">
+            <div class="card-monitor-screen">
+              <div class="card-monitor-inner">
+                <div class="card-monitor-nav"><span></span><span></span><span></span></div>
+                <div class="card-monitor-content">
+                  <div class="card-monitor-block" style="background: var(--color-accent-seafoam);"></div>
+                  <div class="card-monitor-block" style="background: var(--color-bg-muted);"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-monitor-stand"></div>
+          </div>
+          <div class="card-device-phone-overlap">
+            <div class="card-phone-frame">
+              <div class="card-phone-screen">
+                <span class="card-phone-notch"></span>
+                <div class="card-phone-fill" style="height: 34%; background: var(--color-bg-muted); margin-top: 10%;"></div>
+                <div class="card-phone-line" style="width: 70%; background: var(--color-ink-300);"></div>
+                <div class="card-phone-line" style="width: 45%; background: var(--color-ink-300);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="card-title">Mirror</p>
+        <p class="card-role">UX/UI Designer, Branding</p>
+      </a>
+
+      <!-- LikeHer -->
+      <a class="project-card" href="case-study.html">
+        <div class="card-mockup-area">
+          <div class="card-device-phone-fan fan-1">
+            <div class="card-phone-frame">
+              <div class="card-phone-screen">
+                <span class="card-phone-notch"></span>
+                <div class="card-row-dot" style="margin-top: 14%;"><span class="dot" style="background: var(--color-accent-terracotta);"></span><span class="line" style="background: var(--color-ink-300);"></span></div>
+                <div class="card-row-dot"><span class="dot" style="background: var(--color-ink-300);"></span><span class="line" style="background: var(--color-ink-300);"></span></div>
+                <div class="card-row-dot"><span class="dot" style="background: var(--color-ink-300);"></span><span class="line" style="background: var(--color-ink-300);"></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-device-phone-fan fan-2">
+            <div class="card-phone-frame">
+              <div class="card-phone-screen">
+                <span class="card-phone-notch"></span>
+                <div class="card-phone-line" style="width: 60%; background: var(--color-ink-300); margin-top: 22%;"></div>
+                <div class="card-phone-fill" style="height: 10%; background: var(--color-bg-muted);"></div>
+                <div class="card-phone-fill" style="height: 10%; background: var(--color-bg-muted);"></div>
+                <div class="card-phone-fill" style="height: 10%; background: var(--color-accent-terracotta); margin-top: auto;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-device-phone-fan fan-3">
+            <div class="card-phone-frame">
+              <div class="card-phone-screen">
+                <span class="card-phone-notch"></span>
+                <div class="card-phone-ring"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="card-title">LikeHer</p>
+        <p class="card-role">UX/UI Designer, Branding</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <h2>Contact</h2>
+    <p>Interested in working together, or just want to say hello? Reach out — I'd love to hear from you.</p>
+    <a class="btn-ghost" href="mailto:hello@example.com">Say Hello</a>
+  </section>
+</main>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var toggle = document.getElementById('theme-toggle');
+
+    function isDarkNow() {
+      var attr = root.getAttribute('data-theme');
+      if (attr === 'dark') return true;
+      if (attr === 'light') return false;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    function updateLabel() {
+      toggle.textContent = isDarkNow() ? 'Light' : 'Dark';
+    }
+
+    toggle.addEventListener('click', function () {
+      var current = root.getAttribute('data-theme');
+      if (current === 'dark') {
+        root.setAttribute('data-theme', 'light');
+      } else if (current === 'light') {
+        root.removeAttribute('data-theme');
+      } else {
+        root.setAttribute('data-theme', 'dark');
+      }
+      updateLabel();
+    });
+
+    updateLabel();
+  })();
+</script>
+
+</body>
+</html>
