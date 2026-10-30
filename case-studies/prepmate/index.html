@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PrepMate — Case Study — Orawan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --color-bg-base: #F7F8F6;
+    --color-bg-muted: #EDEFEB;
+    --color-white: #FFFFFF;
+    --color-ink-900: #12181F;
+    --color-ink-700: #2B333C;
+    --color-ink-500: #6B7480;
+    --color-ink-300: #B7BEC6;
+    --color-accent-terracotta: #D99A7C;
+    --color-accent-seafoam: #A8CFC3;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  :root[data-theme="dark"] {
+    --color-bg-base: #12181F;
+    --color-bg-muted: #1B222B;
+    --color-ink-900: #F7F8F6;
+    --color-ink-700: #DADFE3;
+    --color-ink-500: #9AA3AD;
+    --color-ink-300: #3A424C;
+    --color-white: #12181F;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--color-bg-base); color: var(--color-ink-700); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; }
+
+  /* ---------- §6 Navigation (approved) ---------- */
+  .site-nav { position: sticky; top: 0; z-index: 50; background: var(--color-bg-base); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 20px 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
+  @media (min-width: 640px) { .nav-inner { padding: 24px 80px; } }
+  @media (max-width: 639px) { .nav-inner { grid-template-columns: 1fr auto; row-gap: 12px; } .nav-links { grid-column: 1 / -1; gap: 28px; } }
+  .wordmark { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
+  .wordmark:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .logo-badge { position: relative; flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; user-select: none; }
+  .logo-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .logo-badge span { position: relative; font-family: var(--font-sans); font-weight: 700; font-size: 14px; line-height: 1; letter-spacing: 1px; color: var(--color-bg-base); }
+  .logo-badge span .logo-o { color: var(--color-accent-terracotta); }
+  .logo-badge span .logo-a { color: var(--color-accent-seafoam); }
+  .wordmark-divider { width: 1px; height: 32px; background: var(--color-ink-300); flex: none; }
+  .wordmark-name { display: flex; flex-direction: column; gap: 2px; line-height: 1; }
+  .wordmark-name span { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 2px; color: var(--color-ink-900); }
+  .nav-brand { display: flex; flex-direction: column; align-items: center; gap: 8px; justify-self: start; }
+  .nav-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
+  .nav-links { display: flex; align-items: center; gap: 36px; margin: 0; padding: 0; list-style: none; }
+  .nav-links a { position: relative; font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; padding-bottom: 8px; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--color-ink-900); opacity: 0; transform: scaleX(0.4); transform-origin: left; transition: opacity .15s ease, transform .15s ease; }
+  .nav-links a:hover::after { opacity: .45; transform: scaleX(1); }
+  .nav-links a.is-active::after { opacity: 1; transform: scaleX(1); }
+  .nav-links a:focus-visible { outline: none; }
+  .nav-links a:focus-visible::after { opacity: 1; transform: scaleX(1); background: var(--color-accent-terracotta); height: 2px; }
+
+  /* ---------- §6 Buttons (approved) ---------- */
+  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-ink-300); background: transparent; color: var(--color-ink-900); font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.5px; padding: 15px 28px; border-radius: 0; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
+  .btn-ghost:hover { background: var(--color-ink-900); color: var(--color-bg-base); border-color: var(--color-ink-900); }
+  .btn-ghost:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+
+  /* ---------- §6 Case-study hero (approved, verbatim) ---------- */
+  .hero { max-width: 1280px; margin: 0 auto; padding: 56px 24px 96px; display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+  @media (min-width: 640px) { .hero { padding: 72px 80px 128px; } }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; gap: 56px; padding-top: 40px; } }
+  .hero-eyebrow { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 20px; }
+  .hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.25rem, 1.6rem + 3.2vw, 5rem); letter-spacing: -0.5px; line-height: 1.15; color: var(--color-ink-900); margin: 0 0 24px; text-wrap: balance; }
+  .hero-description { font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-700); max-width: 34rem; margin: 0 0 40px; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 32px; margin: 0 0 40px; padding: 0; list-style: none; }
+  .meta-row dt { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 6px; }
+  .meta-row dd { font-family: var(--font-sans); font-size: 0.9375rem; color: var(--color-ink-900); margin: 0; }
+  .mockup-area { position: relative; width: 100%; max-width: 460px; height: 420px; margin: 0 auto; }
+  @media (max-width: 860px) { .mockup-area { height: 320px; max-width: 360px; } }
+  .device-phone-fan { position: absolute; width: 34%; top: 6%; }
+  .device-phone-fan.fan-1 { left: 2%; top: 16%; transform: rotate(-14deg); z-index: 1; }
+  .device-phone-fan.fan-2 { left: 33%; top: 0%; transform: rotate(3deg); z-index: 3; }
+  .device-phone-fan.fan-3 { left: 64%; top: 16%; transform: rotate(14deg); z-index: 2; }
+  .phone-frame { background: var(--color-ink-900); border-radius: 20px; padding: 7px; box-shadow: 0 26px 40px -18px rgba(18, 24, 31, 0.42); }
+  .phone-screen { background: var(--color-white); border-radius: 14px; aspect-ratio: 9/18.5; position: relative; overflow: hidden; padding: 11% 9%; display: flex; flex-direction: column; gap: 8%; }
+  .phone-notch { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 26%; height: 2.5%; border-radius: 3px; background: var(--color-ink-300); }
+  .row-dot { display: flex; align-items: center; gap: 6%; }
+  .row-dot .dot { width: 16%; aspect-ratio: 1; border-radius: 50%; flex: none; }
+  .row-dot .line { height: 12%; border-radius: 2px; flex: 1; }
+  .phone-line { height: 7%; border-radius: 2px; }
+  .phone-fill { border-radius: 4px; flex: none; }
+  .phone-ring { width: 42%; aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--color-accent-terracotta); margin: auto; }
+
+  /* ---------- Problem statement band ---------- */
+  .problem-statement { max-width: 1280px; margin: 0 auto; padding: 0 24px 64px; }
+  @media (min-width: 640px) { .problem-statement { padding: 0 80px 64px; } }
+  .problem-statement__text { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem); line-height: 1.3; letter-spacing: -0.25px; color: var(--color-ink-900); max-width: 46rem; margin: 0; text-wrap: balance; }
+
+  /* ---------- Problem-statement supporting cards (PrepMate) ---------- */
+  .problem-cards { max-width: 1280px; margin: 0 auto; padding: 0 24px 64px; }
+  @media (min-width: 640px) { .problem-cards { padding: 0 80px 64px; } }
+  .problem-cards__grid { display: grid; grid-template-columns: 1fr; gap: 64px; }
+  @media (min-width: 768px) { .problem-cards__grid { grid-template-columns: repeat(2, 1fr); } }
+  .problem-card { position: relative; border: 1px solid var(--color-ink-300); border-radius: 2px; padding: 32px; box-shadow: 0 26px 40px -18px rgba(18, 24, 31, 0.42); }
+  :root[data-theme="dark"] .problem-card { box-shadow: none; }
+  .problem-card--accent { background: var(--color-white); }
+  .problem-card--accent::before { content: ""; position: absolute; top: -24px; right: -24px; bottom: -24px; left: -24px; background: var(--color-accent-seafoam); border-radius: 2px; transform: rotate(5deg); z-index: -1; }
+  .problem-card__heading { display: flex; align-items: center; gap: 12px; margin: 0 0 16px; }
+  .problem-card__heading .problem-card__title { margin: 0; }
+  .problem-card__icon { width: 28px; height: 28px; flex: none; color: var(--color-accent-terracotta); }
+  .problem-card__icon svg { width: 100%; height: 100%; }
+  .problem-card__title { font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; color: var(--color-ink-900); margin: 0 0 16px; }
+  .problem-card__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .problem-card__list li { font-size: 0.9375rem; line-height: 1.6; color: var(--color-ink-700); }
+  .problem-card__list strong { color: var(--color-ink-900); font-weight: 600; }
+  .problem-card__text { font-size: 0.9375rem; line-height: 1.6; color: var(--color-ink-700); margin: 0; }
+
+  /* ---------- Section eyebrow + divider (approved, from Stepper components) ---------- */
+  .section-kicker { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; }
+  .section-kicker .rule { width: 28px; height: 1px; background: var(--color-ink-500); flex: none; }
+  .section-kicker span:last-child { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); }
+
+  /* ---------- §6 Table of contents sidebar (approved, verbatim) ---------- */
+  .process-page { max-width: 1280px; margin: 0 auto; padding: 0 24px 40px; }
+  @media (min-width: 640px) { .process-page { padding: 0 80px 40px; } }
+  .process-grid { display: grid; grid-template-columns: minmax(84px, 168px) 1fr; gap: 20px; align-items: start; }
+  @media (min-width: 640px) { .process-grid { gap: 48px; } }
+  .toc-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+  .steps-content { min-width: 0; }
+  .toc-item { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-300); transition: color 0.2s ease; }
+  .toc-item.is-current { color: var(--color-ink-900); }
+  .toc-item:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .toc-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--color-ink-300); background: transparent; flex: none; transition: background-color 0.2s ease, border-color 0.2s ease; }
+  .toc-item.is-current .toc-dot { background: var(--color-accent-terracotta); border-color: var(--color-accent-terracotta); }
+  .step-section { min-height: 30vh; display: flex; flex-direction: column; justify-content: center; padding: 12px 0; }
+  .step-section:not(:first-of-type) { border-top: 1px solid var(--color-ink-300); margin-top: 32px; padding-top: 32px; }
+  .step-current-label { display: block; font-family: var(--font-sans); font-weight: 700; font-size: 1.5rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--color-ink-900); margin-bottom: 28px; }
+  .step-section h3 { font-family: var(--font-sans); font-weight: 600; font-size: 1.375rem; color: var(--color-ink-900); margin: 0 0 16px; }
+  .step-section p { font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-700); margin: 0 0 32px; max-width: 34rem; }
+  .step-media { margin: 0 0 32px; max-width: 34rem; }
+  .step-media img { width: 100%; display: block; border: 1px solid var(--color-ink-300); border-radius: 2px; box-shadow: 0 26px 40px -18px rgba(18, 24, 31, 0.42); }
+  :root[data-theme="dark"] .step-media img { box-shadow: none; }
+  .step-media figcaption { font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-ink-500); margin-top: 32px; }
+  blockquote { font-family: var(--font-display); font-style: italic; font-size: 1.375rem; line-height: 1.5; color: var(--color-ink-900); max-width: 34rem; margin: 0 0 32px; padding: 0; }
+  .recommendation-list { margin: 0 0 32px; padding-left: 20px; max-width: 34rem; }
+  .recommendation-list li { font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-700); margin: 0 0 12px; }
+
+  /* ---------- §6 Project card (approved, verbatim) — "more to explore" ---------- */
+  .highlight { position: relative; white-space: nowrap; }
+  .work-intro h2 .highlight::before { content: ""; position: absolute; left: -6%; width: clamp(80px, 112%, 160px); top: 50%; bottom: 0%; z-index: -1; background-repeat: no-repeat; background-size: 100% 100%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='r1' x='-15%25' y='-40%25' width='130%25' height='180%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.35' numOctaves='2' seed='11' result='edgeNoise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='edgeNoise' scale='11' xChannelSelector='R' yChannelSelector='G' result='displaced'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.18 0.5' numOctaves='2' seed='4' result='grain'/%3E%3CfeColorMatrix in='grain' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.15 1.15 1.15 0 -0.22' result='grainAlpha'/%3E%3CfeComposite in='displaced' in2='grainAlpha' operator='in'/%3E%3C/filter%3E%3C/defs%3E%3Crect x='8' y='15' width='384' height='30' rx='4' fill='%23A8CFC3' filter='url(%23r1)'/%3E%3C/svg%3E"); }
+  .work-intro { max-width: 1180px; margin: 0 auto; padding: 40px 24px 140px; }
+  @media (min-width: 640px) { .work-intro { padding: 40px 40px 160px; } }
+  .work-intro h2 { position: relative; display: inline-block; font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 1.5rem + 2.2vw, 3.25rem); letter-spacing: -0.5px; line-height: 1.15; color: var(--color-ink-900); margin: 0; text-wrap: balance; }
+  .work-intro .kicker { font-family: var(--font-sans); font-weight: 400; font-size: 1rem; color: var(--color-ink-500); margin: 20px 0 0; }
+  .card-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 48px; }
+  @media (min-width: 768px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+  .project-card { display: flex; flex-direction: column; align-items: center; border: 1px solid var(--color-ink-300); border-radius: 2px; padding: 32px 24px 24px; width: 100%; max-width: 300px; margin: 0 auto; text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .project-card:hover { transform: translateY(-4px); border-color: var(--color-ink-900); box-shadow: 0 20px 36px -22px rgba(18, 24, 31, 0.35); }
+  .project-card:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 4px; }
+  .card-mockup-area { position: relative; width: 100%; height: 160px; margin-bottom: 40px; }
+  .card-device-monitor { position: absolute; left: 6%; top: 12%; width: 62%; transform: rotate(-3deg); z-index: 1; }
+  .card-monitor-screen { background: var(--color-ink-900); border-radius: 10px; padding: 8px 8px 16px; box-shadow: 0 24px 34px -20px rgba(18, 24, 31, 0.4); }
+  .card-monitor-stand { width: 30%; height: 10px; margin: 0 auto; background: var(--color-ink-900); border-radius: 0 0 4px 4px; }
+  .card-monitor-inner { background: var(--color-white); border-radius: 3px; aspect-ratio: 16/11; overflow: hidden; display: flex; flex-direction: column; }
+  .card-monitor-nav { height: 16%; background: var(--color-bg-muted); display: flex; align-items: center; gap: 4px; padding: 0 8%; flex: none; }
+  .card-monitor-nav span { width: 5px; height: 5px; border-radius: 50%; background: var(--color-ink-300); }
+  .card-monitor-content { flex: 1; display: flex; gap: 4%; padding: 8%; }
+  .card-monitor-block { flex: 1; border-radius: 3px; }
+  .card-device-phone-overlap { position: absolute; right: 2%; bottom: -6%; width: 26%; transform: rotate(7deg); z-index: 2; }
+  .card-phone-frame { background: var(--color-ink-900); border-radius: 16px; padding: 6px; box-shadow: 0 18px 28px -16px rgba(18, 24, 31, 0.4); }
+  .card-phone-screen { background: var(--color-white); border-radius: 11px; aspect-ratio: 9/18.5; position: relative; overflow: hidden; padding: 12% 10%; display: flex; flex-direction: column; gap: 8%; }
+  .card-phone-notch { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 26%; height: 3%; border-radius: 3px; background: var(--color-ink-300); }
+  .card-phone-line { height: 8%; border-radius: 2px; }
+  .card-phone-fill { border-radius: 4px; flex: none; }
+  .card-mockup-area--image { border-radius: 8px; overflow: hidden; background: var(--color-bg-base); }
+  .card-mockup-area--image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .card-title { font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; color: var(--color-ink-900); margin: 0 0 8px; text-align: center; }
+  .card-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0; text-align: center; min-height: 28px; }
+
+  /* ---------- Theme toggle (approved — appears on every §6 component artifact) ---------- */
+  .theme-toggle { justify-self: center; font-family: var(--font-sans); font-weight: 500; font-size: 0.8125rem; color: var(--color-ink-900); background: var(--color-bg-muted); border: 1px solid var(--color-ink-300); border-radius: 20px; padding: 8px 16px; cursor: pointer; }
+  .theme-toggle:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 2px; }
+
+  /* ---------- Footer (approved — appears on every page) ---------- */
+  .site-footer { border-top: 1px solid var(--color-ink-300); padding: 64px 0; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; align-items: last baseline; gap: 48px; flex-wrap: wrap; }
+  @media (min-width: 640px) { .footer-inner { padding: 0 80px; } }
+  .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: 280px; }
+  .footer-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
+  .footer-links-col { display: flex; flex-direction: column; }
+  .footer-links { display: flex; flex-direction: row; gap: 24px; margin: 0; padding: 0; list-style: none; }
+  .footer-links a { font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; }
+  .footer-links a:hover { text-decoration: underline; }
+  .footer-links a:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .footer-copyright { font-family: var(--font-sans); font-weight: 400; font-size: 0.8125rem; color: var(--color-ink-500); margin: 24px 0 0; }
+  @media (max-width: 767px) {
+    .site-footer { padding: 48px 0; }
+    .footer-inner { gap: 24px; }
+    .footer-copyright { margin-top: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><a class="wordmark" href="../../index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a><p class="nav-role">UX/UI Designer</p></div>
+    <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
+    <ul class="nav-links">
+      <li><a href="../../work/index.html" class="is-active">Work</a></li>
+      <li><a href="../../about/index.html">About</a></li>
+      <li><a href="../../contact/index.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">2025 — App Design</p>
+    <h1>PrepMate</h1>
+    <p class="hero-description">A mobile app that turns emergency preparedness from a daunting, fear-driven task into a structured, achievable process &mdash; guiding people through a personalized plan instead of a generic checklist.</p>
+    <dl class="meta-row">
+      <div><dt>Role</dt><dd>UX Research</dd></div>
+      <div><dt>Duration</dt><dd>8 weeks</dd></div>
+      <div><dt>Tools</dt><dd>FigJam, Figma</dd></div>
+    </dl>
+    <a class="btn-ghost" href="https://www.figma.com/deck/Tu5dZ5zwomurcFRlfd6MmH/PrepMate-330?node-id=1-46&t=BM54nINBCSq8BsuH-1" target="_blank" rel="noopener">View Final Presentation</a>
+  </div>
+  <div class="hero-media">
+    <div class="mockup-area">
+      <div class="device-phone-fan fan-1">
+        <div class="phone-frame">
+          <div class="phone-screen" style="padding: 0; display: block;">
+            <img src="images/prep-mate-app/sign-in-screen.webp" alt="PrepMate sign-in screen" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block;">
+            <span class="phone-notch"></span>
+          </div>
+        </div>
+      </div>
+      <div class="device-phone-fan fan-2">
+        <div class="phone-frame">
+          <div class="phone-screen" style="padding: 0; display: block;">
+            <img src="images/prep-mate-app/start-my-plan-screen.webp" alt="PrepMate Start My Plan onboarding screen" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block;">
+            <span class="phone-notch"></span>
+          </div>
+        </div>
+      </div>
+      <div class="device-phone-fan fan-3">
+        <div class="phone-frame">
+          <div class="phone-screen" style="padding: 0; display: block;">
+            <img src="images/prep-mate-app/plans-screen.webp" alt="PrepMate Plans screen showing recommended emergency plans" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block;">
+            <span class="phone-notch"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="problem-statement">
+  <div class="section-kicker"><span class="rule"></span><span>The Problem</span></div>
+  <p class="problem-statement__text">How might we better prepare for hazards and disruptions during emergencies when professional responders are not immediately available?</p>
+</section>
+
+<div class="problem-cards">
+  <div class="section-kicker"><span class="rule"></span><span>Goal &amp; Proposed Solution</span></div>
+  <div class="problem-cards__grid">
+  <div class="problem-card">
+    <div class="problem-card__heading">
+      <div class="problem-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg></div>
+      <h3 class="problem-card__title">Research &amp; Goal</h3>
+    </div>
+    <ul class="problem-card__list">
+      <li><strong>Simplify:</strong> Make emergency preparedness easy to understand and act on.</li>
+      <li><strong>Motivate:</strong> Encourage proactive planning through personalized guidance and progress tracking.</li>
+      <li><strong>Empower:</strong> Build user confidence and resilience during emergencies.</li>
+    </ul>
+  </div>
+  <div class="problem-card problem-card--accent">
+    <div class="problem-card__heading">
+      <div class="problem-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V17h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 3z"/></svg></div>
+      <h3 class="problem-card__title">The Solution</h3>
+    </div>
+    <p class="problem-card__text">A guided, step-by-step mobile experience &mdash; personalized preparedness plans, transparent progress tracking, and a clear design system &mdash; that turns overwhelming emergency prep into simple, doable actions.</p>
+  </div>
+  </div>
+</div>
+
+<div class="process-page">
+  <div class="section-kicker"><span class="rule"></span><span>The Process</span></div>
+
+
+  <div class="process-grid">
+    <aside class="toc-sidebar" aria-label="Process steps">
+      <a class="toc-item is-current" href="#step-discovery" data-step="discovery"><span class="toc-dot"></span><span>01. Discovery</span></a>
+      <a class="toc-item" href="#step-define" data-step="define"><span class="toc-dot"></span><span>02. Define</span></a>
+      <a class="toc-item" href="#step-ideate" data-step="ideate"><span class="toc-dot"></span><span>03. Ideate</span></a>
+      <a class="toc-item" href="#step-about-the-app" data-step="about-the-app"><span class="toc-dot"></span><span>04. About the App</span></a>
+      <a class="toc-item" href="#step-design-process" data-step="design-process"><span class="toc-dot"></span><span>05. Design Process</span></a>
+      <a class="toc-item" href="#step-validate" data-step="validate"><span class="toc-dot"></span><span>06. Validate</span></a>
+    </aside>
+
+    <div class="steps-content">
+      <section class="step-section" id="step-discovery">
+        <span class="step-current-label">01. Discovery</span>
+        <h3>User Interviews</h3>
+        <p>Conducted 8 user interviews to uncover preparedness needs, behaviors, and pain points, and confirmed the insights against feedback from Emergency Management staff and further research. Four themes stood out: information overload (people want to prepare but don't know where to start), difficulty sustaining readiness over time, the need for personalization, and preparedness working best when framed as an ongoing habit rather than a one-time task.</p>
+        <h3>Persona &amp; User Journey Map</h3>
+        <p>Research surfaced two distinct archetypes: &ldquo;Emergency Prep Newbies,&rdquo; who feel overwhelmed by where to start, and &ldquo;Doomsday Preppers,&rdquo; who struggle to sustain and maintain plans they&rsquo;ve already built.</p>
+        <figure class="step-media"><img src="images/prep-mate-app/personas.webp" alt="Emergency Prep Newbies and Doomsday Preppers personas"><figcaption>Emergency Prep Newbies and Doomsday Preppers personas</figcaption></figure>
+        <figure class="step-media"><img src="images/prep-mate-app/user-journey-map.png" alt="User journey map across Awareness, Consideration, Execution, Outcome, and Impression stages for Doomsday Preppers and Emergency Prep Newbies"><figcaption>User journey map for Doomsday Preppers and Emergency Prep Newbies</figcaption></figure>
+        <h3>Competitive Analysis</h3>
+        <p>A review of existing preparedness and alert apps found they focus on alerts rather than actionable guidance, are built for experienced users rather than beginners, and rarely offer a personalized plan &mdash; gaps PrepMate was designed to close.</p>
+      </section>
+
+      <section class="step-section" id="step-define">
+        <span class="step-current-label">02. Define</span>
+        <h3>Problem Statement</h3>
+        <p>How might we better prepare people for hazards and disruptions during emergencies when professional responders aren&rsquo;t immediately available?</p>
+      </section>
+
+      <section class="step-section" id="step-ideate">
+        <span class="step-current-label">03. Ideate</span>
+        <h3>Concept Sketches</h3>
+        <p>Using journey mapping and &ldquo;How Might We&rdquo; exercises, I explored ways to reduce user overwhelm and shape a more guided, personalized preparedness experience, generating concepts like personalized preparedness paths and bite-sized educational resources.</p>
+        <figure class="step-media"><img src="images/prep-mate-app/original-problem-statement.webp" alt="PrepMate ideation workshop — original problem statement"><figcaption>Mapping the original problem statement</figcaption></figure>
+        <figure class="step-media"><img src="images/prep-mate-app/opportunities.webp" alt="PrepMate ideation workshop — opportunities from journey mapping"><figcaption>Opportunities surfaced through journey mapping</figcaption></figure>
+        <figure class="step-media"><img src="images/prep-mate-app/how-might-we.webp" alt="PrepMate ideation workshop — How might we exercises"><figcaption>How Might We exercises</figcaption></figure>
+      </section>
+
+      <section class="step-section" id="step-about-the-app">
+        <span class="step-current-label">04. About the App</span>
+        <h3>Overview</h3>
+        <p>PrepMate is a mobile app designed to be a trusted guide in any emergency, turning disaster preparedness from a daunting, fear-driven task into a structured, attainable process. Its mission is to help people build resilience and get ready for moments when professional help may be delayed.</p>
+        <h3>Who It&rsquo;s For</h3>
+        <p>PrepMate speaks to two research-backed archetypes &mdash; &ldquo;Emergency Prep Newbies&rdquo; who don&rsquo;t know where to start, and &ldquo;Doomsday Preppers&rdquo; who need help sustaining the plans they already have.</p>
+      </section>
+
+      <section class="step-section" id="step-design-process">
+        <span class="step-current-label">05. Design Process</span>
+        <h3>Visual Design</h3>
+        <p>Through an iterative Figma process, I developed a modern, accessible UI focused on clarity and trust. Testing informed refinements to navigation, task flows, and information hierarchy, resulting in a more intuitive experience with reduced cognitive load. Three features anchor the experience: personalized onboarding with multiple paths to choose from, guided profile setup that generates a tailored emergency plan, and real-time alerts for hazards specific to the user&rsquo;s location with clear next steps.</p>
+        <figure class="step-media"><img src="images/prep-mate-app/feature1.webp" alt="PrepMate feature — guided onboarding with multiple paths to choose from"><figcaption>Feature 1 &mdash; guided onboarding with multiple paths to choose from</figcaption></figure>
+        <figure class="step-media"><img src="images/prep-mate-app/feature2.webp" alt="PrepMate feature — guided onboarding for profile setup and a personalized emergency plan"><figcaption>Feature 2 &mdash; guided onboarding for profile setup and a personalized emergency plan</figcaption></figure>
+        <figure class="step-media"><img src="images/prep-mate-app/feature3.webp" alt="PrepMate feature — real-time hazards for the user's location with next steps"><figcaption>Feature 3 &mdash; real-time hazards for the user's location with next steps</figcaption></figure>
+      </section>
+
+      <section class="step-section" id="step-validate">
+        <span class="step-current-label">06. Validate</span>
+        <h3>Usability Testing</h3>
+        <p>Conducted mixed remote (Zoom) and in-person usability sessions across 3 participants completed 6/6 tasks of varied ages and genders with zero prior app experience.</p>
+        <p><strong>Success Rate:</strong> 100% completion rate (6 out of 6 total tasks completed).</p>
+        <h3>Key Findings</h3>
+        <p>Usability testing revealed opportunities to make PrepMate simpler, clearer, and more action-oriented for first-time users. Testing with three participants showed that core tasks were generally easy to complete, but users experienced unnecessary steps and some unclear terminology. I simplified onboarding, clarified navigation and labels, streamlined alert preferences, and introduced more flexibility in how users complete preparation tasks. These changes helped reduce cognitive load while giving users greater control over their emergency-preparedness journey.</p>
+        <a class="btn-ghost" id="usability-report-link" href="documents/prep-mate-app/prepmate-usability-report.pdf" target="_blank" rel="noopener" style="align-self: flex-start;">View Usability Report</a>
+      </section>
+    </div>
+  </div>
+</div>
+
+<section class="work-intro">
+  <h2><span class="highlight">There's</span> more to explore</h2>
+  <p class="kicker">Check out other works by Orawan</p>
+  <div class="card-grid">
+    <!-- FAAC -->
+    <a class="project-card" href="../faac/index.html">
+      <div class="card-mockup-area card-mockup-area--image">
+        <img src="images/project-cards/faac-card.webp" alt="FAAC case-study hero mockup preview">
+      </div>
+      <p class="card-title">FAAC</p>
+      <p class="card-role">Web Design</p>
+    </a>
+    <!-- Ivy Growth Group -->
+    <a class="project-card" href="../ivy-growth-group/index.html">
+      <div class="card-mockup-area card-mockup-area--image">
+        <img src="images/project-cards/ivygrowthgroup-card.webp" alt="Ivy Growth Group case-study hero mockup preview">
+      </div>
+      <p class="card-title">Ivy Growth Group</p>
+      <p class="card-role">Heuristic Review</p>
+    </a>
+    <!-- No Fuss Meal Plan -->
+    <a class="project-card" href="../no-fuss-meal-plan/index.html">
+      <div class="card-mockup-area card-mockup-area--image">
+        <img src="images/project-cards/nofussmealplan-card.webp" alt="No Fuss Meal Plan case-study hero mockup preview">
+      </div>
+      <p class="card-title">No Fuss Meal Plan</p>
+      <p class="card-role">UX/UI Case Study</p>
+    </a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="../../index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a>
+      <p class="footer-role">UX/UI Designer</p>
+    </div>
+    <div class="footer-links-col">
+      <ul class="footer-links">
+        <li><a href="../../work/index.html">Work</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../contact/index.html">Contact</a></li>
+      </ul>
+      <p class="footer-copyright">© 2026 Orawan. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var toggle = document.getElementById('theme-toggle');
+
+    try {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark' || saved === 'light') { root.setAttribute('data-theme', saved); }
+    } catch (e) {}
+
+    function isDarkNow() {
+      return root.getAttribute('data-theme') === 'dark';
+    }
+
+    function updateLabel() {
+      toggle.textContent = isDarkNow() ? 'Light' : 'Dark';
+    }
+
+    toggle.addEventListener('click', function () {
+      var current = root.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : (current === 'light' ? null : 'dark');
+      if (next) { root.setAttribute('data-theme', next); } else { root.removeAttribute('data-theme'); }
+      try {
+        if (next) { localStorage.setItem('theme', next); } else { localStorage.removeItem('theme'); }
+      } catch (e) {}
+      updateLabel();
+    });
+
+    updateLabel();
+  })();
+</script>
+<script>
+  (function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll('.step-section'));
+    var navItems = document.querySelectorAll('.toc-item');
+    if (!sections.length || !navItems.length) return;
+
+    function setCurrent(key) {
+      navItems.forEach(function (el) {
+        el.classList.toggle('is-current', el.dataset.step === key);
+      });
+    }
+
+    function updateCurrent() {
+      var vh = window.innerHeight;
+      var bestSection = null;
+      var bestVisible = -1;
+      sections.forEach(function (section) {
+        var rect = section.getBoundingClientRect();
+        var visibleTop = Math.max(rect.top, 0);
+        var visibleBottom = Math.min(rect.bottom, vh);
+        var visible = Math.max(0, visibleBottom - visibleTop);
+        if (visible > bestVisible) {
+          bestVisible = visible;
+          bestSection = section;
+        }
+      });
+      if (bestSection && bestVisible > 0) {
+        setCurrent(bestSection.id.replace('step-', ''));
+      }
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          updateCurrent();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateCurrent();
+  })();
+</script>
+
+</body>
+</html>

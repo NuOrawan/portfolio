@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LikeHer — Case Study — Nu</title>
+<title>LikeHer — Case Study — Orawan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,17 +22,6 @@
     --font-display: 'Fraunces', Georgia, serif;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --color-bg-base: #12181F;
-      --color-bg-muted: #1B222B;
-      --color-ink-900: #F7F8F6;
-      --color-ink-700: #DADFE3;
-      --color-ink-500: #9AA3AD;
-      --color-ink-300: #3A424C;
-      --color-white: #12181F;
-    }
-  }
   :root[data-theme="dark"] {
     --color-bg-base: #12181F;
     --color-bg-muted: #1B222B;
@@ -50,9 +39,19 @@
   .site-nav { position: sticky; top: 0; z-index: 50; background: var(--color-bg-base); }
   .nav-inner { max-width: 1280px; margin: 0 auto; padding: 20px 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
   @media (min-width: 640px) { .nav-inner { padding: 24px 80px; } }
-  .logo-badge { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--color-ink-900); display: flex; align-items: center; justify-content: center; text-decoration: none; user-select: none; }
-  .logo-badge span { font-family: var(--font-sans); font-weight: 400; font-size: 13px; line-height: 1; color: var(--color-bg-base); }
-  .logo-badge:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  @media (max-width: 639px) { .nav-inner { grid-template-columns: 1fr auto; row-gap: 12px; } .nav-links { grid-column: 1 / -1; gap: 28px; } }
+  .wordmark { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
+  .wordmark:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .logo-badge { position: relative; flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; user-select: none; }
+  .logo-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .logo-badge span { position: relative; font-family: var(--font-sans); font-weight: 700; font-size: 14px; line-height: 1; letter-spacing: 1px; color: var(--color-bg-base); }
+  .logo-badge span .logo-o { color: var(--color-accent-terracotta); }
+  .logo-badge span .logo-a { color: var(--color-accent-seafoam); }
+  .wordmark-divider { width: 1px; height: 32px; background: var(--color-ink-300); flex: none; }
+  .wordmark-name { display: flex; flex-direction: column; gap: 2px; line-height: 1; }
+  .wordmark-name span { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 2px; color: var(--color-ink-900); }
+  .nav-brand { display: flex; flex-direction: column; align-items: center; gap: 8px; justify-self: start; }
+  .nav-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
   .nav-links { display: flex; align-items: center; gap: 36px; margin: 0; padding: 0; list-style: none; }
   .nav-links a { position: relative; font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; padding-bottom: 8px; }
   .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--color-ink-900); opacity: 0; transform: scaleX(0.4); transform-origin: left; transition: opacity .15s ease, transform .15s ease; }
@@ -62,7 +61,7 @@
   .nav-links a:focus-visible::after { opacity: 1; transform: scaleX(1); background: var(--color-accent-terracotta); height: 2px; }
 
   /* ---------- §6 Buttons (approved) ---------- */
-  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-ink-300); background: transparent; color: var(--color-ink-900); font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.5px; padding: 15px 28px; border-radius: 999px; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
+  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-ink-300); background: transparent; color: var(--color-ink-900); font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.5px; padding: 15px 28px; border-radius: 0; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
   .btn-ghost:hover { background: var(--color-ink-900); color: var(--color-bg-base); border-color: var(--color-ink-900); }
   .btn-ghost:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
 
@@ -93,17 +92,13 @@
   .phone-ring { width: 42%; aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--color-accent-terracotta); margin: auto; }
 
   /* ---------- Section eyebrow + divider (approved, from Stepper components) ---------- */
-  .section-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+  .section-kicker { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; }
   .section-kicker .rule { width: 28px; height: 1px; background: var(--color-ink-500); flex: none; }
   .section-kicker span:last-child { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); }
 
-  /* ---------- §6 Process stepper — sidebar (approved, verbatim) ---------- */
-  .process-page { max-width: 1000px; margin: 0 auto; padding: 0 24px 40px; }
-  @media (min-width: 640px) { .process-page { padding: 0 40px 40px; } }
-  .stepper { display: flex; justify-content: space-between; gap: 24px; padding-bottom: 4px; margin-bottom: 64px; overflow-x: auto; }
-  .step { flex: none; text-decoration: none; font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--color-ink-300); white-space: nowrap; }
-  .step.is-current { color: var(--color-ink-900); }
-  .step:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  /* ---------- §6 Table of contents sidebar (approved, verbatim) ---------- */
+  .process-page { max-width: 1280px; margin: 0 auto; padding: 0 24px 40px; }
+  @media (min-width: 640px) { .process-page { padding: 0 80px 40px; } }
   .process-grid { display: grid; grid-template-columns: minmax(84px, 168px) 1fr; gap: 20px; align-items: start; }
   @media (min-width: 640px) { .process-grid { gap: 48px; } }
   .toc-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
@@ -114,23 +109,25 @@
   .toc-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--color-ink-300); background: transparent; flex: none; transition: background-color 0.2s ease, border-color 0.2s ease; }
   .toc-item.is-current .toc-dot { background: var(--color-accent-terracotta); border-color: var(--color-accent-terracotta); }
   .step-section { min-height: 30vh; display: flex; flex-direction: column; justify-content: center; padding: 12px 0; }
-  .step-current-label { display: block; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--color-ink-900); margin-bottom: 28px; }
+  .step-section:not(:first-of-type) { border-top: 1px solid var(--color-ink-300); margin-top: 32px; padding-top: 32px; }
+  .step-current-label { display: block; font-family: var(--font-sans); font-weight: 700; font-size: 1.5rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--color-ink-900); margin-bottom: 28px; }
   .step-section h3 { font-family: var(--font-sans); font-weight: 600; font-size: 1.375rem; color: var(--color-ink-900); margin: 0 0 16px; }
   .step-section p { font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-700); margin: 0 0 32px; max-width: 34rem; }
   blockquote { font-family: var(--font-display); font-style: italic; font-size: 1.375rem; line-height: 1.5; color: var(--color-ink-900); max-width: 34rem; margin: 0 0 32px; padding: 0; }
 
   /* ---------- §6 Project card (approved, verbatim) — "more to explore" ---------- */
   .highlight { position: relative; white-space: nowrap; }
-  .work-intro h2 .highlight::before { content: ""; position: absolute; left: -4px; right: -4px; bottom: 3px; height: 0.4em; background: var(--color-accent-seafoam); z-index: -1; border-radius: 2px; }
+  .work-intro h2 .highlight::before { content: ""; position: absolute; left: -6%; width: clamp(80px, 112%, 160px); top: 50%; bottom: 0%; z-index: -1; background-repeat: no-repeat; background-size: 100% 100%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='r1' x='-15%25' y='-40%25' width='130%25' height='180%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.35' numOctaves='2' seed='11' result='edgeNoise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='edgeNoise' scale='11' xChannelSelector='R' yChannelSelector='G' result='displaced'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.18 0.5' numOctaves='2' seed='4' result='grain'/%3E%3CfeColorMatrix in='grain' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.15 1.15 1.15 0 -0.22' result='grainAlpha'/%3E%3CfeComposite in='displaced' in2='grainAlpha' operator='in'/%3E%3C/filter%3E%3C/defs%3E%3Crect x='8' y='15' width='384' height='30' rx='4' fill='%23A8CFC3' filter='url(%23r1)'/%3E%3C/svg%3E"); }
   .work-intro { max-width: 1180px; margin: 0 auto; padding: 40px 24px 140px; }
   @media (min-width: 640px) { .work-intro { padding: 40px 40px 160px; } }
   .work-intro h2 { position: relative; display: inline-block; font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 1.5rem + 2.2vw, 3.25rem); letter-spacing: -0.5px; line-height: 1.15; color: var(--color-ink-900); margin: 0; text-wrap: balance; }
   .work-intro .kicker { font-family: var(--font-sans); font-weight: 400; font-size: 1rem; color: var(--color-ink-500); margin: 20px 0 0; }
-  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-top: 56px; }
-  .project-card { display: flex; flex-direction: column; align-items: center; border: 1px solid var(--color-ink-300); border-radius: 2px; padding: 56px 40px 40px; text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .card-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 48px; }
+  @media (min-width: 768px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+  .project-card { display: flex; flex-direction: column; align-items: center; border: 1px solid var(--color-ink-300); border-radius: 2px; padding: 32px 24px 24px; width: 100%; max-width: 300px; margin: 0 auto; text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
   .project-card:hover { transform: translateY(-4px); border-color: var(--color-ink-900); box-shadow: 0 20px 36px -22px rgba(18, 24, 31, 0.35); }
   .project-card:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 4px; }
-  .card-mockup-area { position: relative; width: 100%; height: 240px; margin-bottom: 36px; }
+  .card-mockup-area { position: relative; width: 100%; height: 160px; margin-bottom: 40px; }
   .card-device-monitor { position: absolute; left: 6%; top: 12%; width: 62%; transform: rotate(-3deg); z-index: 1; }
   .card-monitor-screen { background: var(--color-ink-900); border-radius: 10px; padding: 8px 8px 16px; box-shadow: 0 24px 34px -20px rgba(18, 24, 31, 0.4); }
   .card-monitor-stand { width: 30%; height: 10px; margin: 0 auto; background: var(--color-ink-900); border-radius: 0 0 4px 4px; }
@@ -145,31 +142,51 @@
   .card-phone-notch { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 26%; height: 3%; border-radius: 3px; background: var(--color-ink-300); }
   .card-phone-line { height: 8%; border-radius: 2px; }
   .card-phone-fill { border-radius: 4px; flex: none; }
-  .card-title { font-family: var(--font-display); font-weight: 400; font-size: 1.625rem; color: var(--color-ink-900); margin: 0 0 12px; text-align: center; }
-  .card-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0; text-align: center; }
+  .card-mockup-area--image { border-radius: 8px; overflow: hidden; background: var(--color-bg-base); }
+  .card-mockup-area--image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .card-title { font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; color: var(--color-ink-900); margin: 0 0 8px; text-align: center; }
+  .card-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0; text-align: center; min-height: 28px; }
 
   /* ---------- Theme toggle (approved — appears on every §6 component artifact) ---------- */
   .theme-toggle { justify-self: center; font-family: var(--font-sans); font-weight: 500; font-size: 0.8125rem; color: var(--color-ink-900); background: var(--color-bg-muted); border: 1px solid var(--color-ink-300); border-radius: 20px; padding: 8px 16px; cursor: pointer; }
   .theme-toggle:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 2px; }
+
+  /* ---------- Footer (approved — appears on every page) ---------- */
+  .site-footer { border-top: 1px solid var(--color-ink-300); padding: 64px 0; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; align-items: last baseline; gap: 48px; flex-wrap: wrap; }
+  @media (min-width: 640px) { .footer-inner { padding: 0 80px; } }
+  .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: 280px; }
+  .footer-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
+  .footer-links-col { display: flex; flex-direction: column; }
+  .footer-links { display: flex; flex-direction: row; gap: 24px; margin: 0; padding: 0; list-style: none; }
+  .footer-links a { font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; }
+  .footer-links a:hover { text-decoration: underline; }
+  .footer-links a:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .footer-copyright { font-family: var(--font-sans); font-weight: 400; font-size: 0.8125rem; color: var(--color-ink-500); margin: 24px 0 0; }
+  @media (max-width: 767px) {
+    .site-footer { padding: 48px 0; }
+    .footer-inner { gap: 24px; }
+    .footer-copyright { margin-top: 16px; }
+  }
 </style>
 </head>
 <body>
 
 <header class="site-nav">
   <div class="nav-inner">
-    <a class="logo-badge" href="index.html" aria-label="Nu — home"><span>nu</span></a>
+    <div class="nav-brand"><a class="wordmark" href="../../index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a><p class="nav-role">UX/UI Designer</p></div>
     <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
     <ul class="nav-links">
-      <li><a href="index.html" class="is-active">Work</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="../../work/index.html" class="is-active">Work</a></li>
+      <li><a href="../../about/index.html">About</a></li>
+      <li><a href="../../contact/index.html">Contact</a></li>
     </ul>
   </div>
 </header>
 
 <section class="hero">
   <div class="hero-text">
-    <p class="hero-eyebrow">2024 — Product Design</p>
+    <p class="hero-eyebrow">2026 — Product Design</p>
     <h1>LikeHer</h1>
     <p class="hero-description">Redesigning a dating app around consent-first matching and emotional safety — from onboarding through the first real conversation.</p>
     <dl class="meta-row">
@@ -218,13 +235,6 @@
 <div class="process-page">
   <div class="section-kicker"><span class="rule"></span><span>The Process</span></div>
 
-  <nav class="stepper" aria-label="Case study process">
-    <a class="step is-current" href="#step-discovery" data-step="discovery">01. Discovery</a>
-    <a class="step" href="#step-define" data-step="define">02. Define</a>
-    <a class="step" href="#step-ideate" data-step="ideate">03. Ideate</a>
-    <a class="step" href="#step-ui" data-step="ui">04. UI</a>
-    <a class="step" href="#step-validate" data-step="validate">05. Validate</a>
-  </nav>
 
   <div class="process-grid">
     <aside class="toc-sidebar" aria-label="Process steps">
@@ -274,51 +284,72 @@
 
 <section class="work-intro">
   <h2><span class="highlight">There's</span> more to explore</h2>
-  <p class="kicker">Check out other works by Nu</p>
+  <p class="kicker">Check out other works by Orawan</p>
   <div class="card-grid">
-    <!-- Mirror -->
-    <a class="project-card" href="#mirror">
-      <div class="card-mockup-area">
-        <div class="card-device-monitor">
-          <div class="card-monitor-screen">
-            <div class="card-monitor-inner">
-              <div class="card-monitor-nav"><span></span><span></span><span></span></div>
-              <div class="card-monitor-content">
-                <div class="card-monitor-block" style="background: var(--color-accent-seafoam);"></div>
-                <div class="card-monitor-block" style="background: var(--color-bg-muted);"></div>
-              </div>
-            </div>
-          </div>
-          <div class="card-monitor-stand"></div>
-        </div>
-        <div class="card-device-phone-overlap">
-          <div class="card-phone-frame">
-            <div class="card-phone-screen">
-              <span class="card-phone-notch"></span>
-              <div class="card-phone-fill" style="height: 34%; background: var(--color-bg-muted); margin-top: 10%;"></div>
-              <div class="card-phone-line" style="width: 70%; background: var(--color-ink-300);"></div>
-              <div class="card-phone-line" style="width: 45%; background: var(--color-ink-300);"></div>
-            </div>
-          </div>
-        </div>
+    <!-- FAAC -->
+    <a class="project-card" href="../faac/index.html">
+      <div class="card-mockup-area card-mockup-area--image">
+        <img src="images/project-cards/faac-card.webp" alt="FAAC case-study hero mockup preview">
       </div>
-      <p class="card-title">Mirror</p>
-      <p class="card-role">UX/UI Designer, Branding</p>
+      <p class="card-title">FAAC</p>
+      <p class="card-role">Web Design</p>
     </a>
-    <!-- Template note: add further <a class="project-card"> entries here as more case studies are built. -->
+    <!-- Ivy Growth Group -->
+    <a class="project-card" href="../ivy-growth-group/index.html">
+      <div class="card-mockup-area card-mockup-area--image">
+        <img src="images/project-cards/ivygrowthgroup-card.webp" alt="Ivy Growth Group case-study hero mockup preview">
+      </div>
+      <p class="card-title">Ivy Growth Group</p>
+      <p class="card-role">Heuristic Review</p>
+    </a>
+    <!-- PrepMate -->
+    <a class="project-card" href="../prepmate/index.html">
+      <div class="card-mockup-area card-mockup-area--image">
+        <img src="images/project-cards/prepmate-card.webp" alt="PrepMate case-study hero mockup preview">
+      </div>
+      <p class="card-title">PrepMate</p>
+      <p class="card-role">UX/UI Case Study</p>
+    </a>
+    <!-- No Fuss Meal Plan -->
+    <a class="project-card" href="../no-fuss-meal-plan/index.html">
+      <div class="card-mockup-area card-mockup-area--image">
+        <img src="images/project-cards/nofussmealplan-card.webp" alt="No Fuss Meal Plan case-study hero mockup preview">
+      </div>
+      <p class="card-title">No Fuss Meal Plan</p>
+      <p class="card-role">UX/UI Case Study</p>
+    </a>
   </div>
 </section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="../../index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a>
+      <p class="footer-role">UX/UI Designer</p>
+    </div>
+    <div class="footer-links-col">
+      <ul class="footer-links">
+        <li><a href="../../work/index.html">Work</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../contact/index.html">Contact</a></li>
+      </ul>
+      <p class="footer-copyright">© 2026 Orawan. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
 
 <script>
   (function () {
     var root = document.documentElement;
     var toggle = document.getElementById('theme-toggle');
 
+    try {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark' || saved === 'light') { root.setAttribute('data-theme', saved); }
+    } catch (e) {}
+
     function isDarkNow() {
-      var attr = root.getAttribute('data-theme');
-      if (attr === 'dark') return true;
-      if (attr === 'light') return false;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return root.getAttribute('data-theme') === 'dark';
     }
 
     function updateLabel() {
@@ -327,17 +358,61 @@
 
     toggle.addEventListener('click', function () {
       var current = root.getAttribute('data-theme');
-      if (current === 'dark') {
-        root.setAttribute('data-theme', 'light');
-      } else if (current === 'light') {
-        root.removeAttribute('data-theme');
-      } else {
-        root.setAttribute('data-theme', 'dark');
-      }
+      var next = current === 'dark' ? 'light' : (current === 'light' ? null : 'dark');
+      if (next) { root.setAttribute('data-theme', next); } else { root.removeAttribute('data-theme'); }
+      try {
+        if (next) { localStorage.setItem('theme', next); } else { localStorage.removeItem('theme'); }
+      } catch (e) {}
       updateLabel();
     });
 
     updateLabel();
+  })();
+</script>
+<script>
+  (function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll('.step-section'));
+    var navItems = document.querySelectorAll('.toc-item');
+    if (!sections.length || !navItems.length) return;
+
+    function setCurrent(key) {
+      navItems.forEach(function (el) {
+        el.classList.toggle('is-current', el.dataset.step === key);
+      });
+    }
+
+    function updateCurrent() {
+      var vh = window.innerHeight;
+      var bestSection = null;
+      var bestVisible = -1;
+      sections.forEach(function (section) {
+        var rect = section.getBoundingClientRect();
+        var visibleTop = Math.max(rect.top, 0);
+        var visibleBottom = Math.min(rect.bottom, vh);
+        var visible = Math.max(0, visibleBottom - visibleTop);
+        if (visible > bestVisible) {
+          bestVisible = visible;
+          bestSection = section;
+        }
+      });
+      if (bestSection && bestVisible > 0) {
+        setCurrent(bestSection.id.replace('step-', ''));
+      }
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          updateCurrent();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateCurrent();
   })();
 </script>
 

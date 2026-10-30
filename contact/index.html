@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — Orawan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --color-bg-base: #F7F8F6;
+    --color-bg-muted: #EDEFEB;
+    --color-white: #FFFFFF;
+    --color-ink-900: #12181F;
+    --color-ink-700: #2B333C;
+    --color-ink-500: #6B7480;
+    --color-ink-300: #B7BEC6;
+    --color-accent-terracotta: #D99A7C;
+    --color-accent-seafoam: #A8CFC3;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  :root[data-theme="dark"] {
+    --color-bg-base: #12181F;
+    --color-bg-muted: #1B222B;
+    --color-ink-900: #F7F8F6;
+    --color-ink-700: #DADFE3;
+    --color-ink-500: #9AA3AD;
+    --color-ink-300: #3A424C;
+    --color-white: #12181F;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--color-bg-base); color: var(--color-ink-700); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; }
+
+  /* ---------- §6 Navigation (approved) ---------- */
+  .site-nav { position: sticky; top: 0; z-index: 50; background: var(--color-bg-base); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 20px 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
+  @media (min-width: 640px) { .nav-inner { padding: 24px 80px; } }
+  @media (max-width: 639px) { .nav-inner { grid-template-columns: 1fr auto; row-gap: 12px; } .nav-links { grid-column: 1 / -1; gap: 28px; } }
+  .wordmark { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
+  .wordmark:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .logo-badge { position: relative; flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; user-select: none; }
+  .logo-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .logo-badge span { position: relative; font-family: var(--font-sans); font-weight: 700; font-size: 14px; line-height: 1; letter-spacing: 1px; color: var(--color-bg-base); }
+  .logo-badge span .logo-o { color: var(--color-accent-terracotta); }
+  .logo-badge span .logo-a { color: var(--color-accent-seafoam); }
+  .wordmark-divider { width: 1px; height: 32px; background: var(--color-ink-300); flex: none; }
+  .wordmark-name { display: flex; flex-direction: column; gap: 2px; line-height: 1; }
+  .wordmark-name span { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 2px; color: var(--color-ink-900); }
+  .nav-brand { display: flex; flex-direction: column; align-items: center; gap: 8px; justify-self: start; }
+  .nav-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
+  .nav-links { display: flex; align-items: center; gap: 36px; margin: 0; padding: 0; list-style: none; }
+  .nav-links a { position: relative; font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; padding-bottom: 8px; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--color-ink-900); opacity: 0; transform: scaleX(0.4); transform-origin: left; transition: opacity .15s ease, transform .15s ease; }
+  .nav-links a:hover::after { opacity: .45; transform: scaleX(1); }
+  .nav-links a.is-active::after { opacity: 1; transform: scaleX(1); }
+  .nav-links a:focus-visible { outline: none; }
+  .nav-links a:focus-visible::after { opacity: 1; transform: scaleX(1); background: var(--color-accent-terracotta); height: 2px; }
+
+  main { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 640px) { main { padding: 0 80px; } }
+
+  /* ---------- Page hero (Work page — eyebrow + heading, no CTA) ---------- */
+  .page-hero { padding: 64px 0 48px; }
+  .page-hero .eyebrow { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 16px; }
+  .page-hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.25rem, 1.6rem + 3.2vw, 4.5rem); letter-spacing: -0.5px; line-height: 1.15; color: var(--color-ink-900); margin: 0 0 24px; max-width: 16ch; text-wrap: balance; }
+  .page-hero .hero-description { font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-700); max-width: 34rem; margin: 0; }
+
+  /* ---------- §6 Buttons (approved) ---------- */
+  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-ink-300); background: transparent; color: var(--color-ink-900); font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.5px; padding: 15px 28px; border-radius: 0; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
+  .btn-ghost:hover { background: var(--color-ink-900); color: var(--color-bg-base); border-color: var(--color-ink-900); }
+  .btn-ghost:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+
+
+  /* ---------- Contact page (new, Oct 2026 — mailto-based, no backend) ---------- */
+  .contact-page { padding: 0 0 120px; }
+  .contact-grid { display: grid; grid-template-columns: minmax(0, 34rem) minmax(0, 1fr); gap: 80px; align-items: start; }
+  .contact-form { display: flex; flex-direction: column; gap: 24px; }
+  .contact-field { display: flex; flex-direction: column; gap: 8px; }
+  .contact-field label { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); }
+  .contact-field input, .contact-field textarea { font-family: var(--font-sans); font-size: 1rem; color: var(--color-ink-900); background: var(--color-bg-muted); border: 1px solid var(--color-ink-300); border-radius: 0; padding: 12px 14px; width: 100%; box-sizing: border-box; }
+  .contact-field textarea { resize: vertical; min-height: 160px; }
+  .contact-field input:focus-visible, .contact-field textarea:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 2px; }
+  .contact-field.has-error input, .contact-field.has-error textarea { border-color: var(--color-accent-terracotta); }
+  .contact-field-error { font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; color: var(--color-accent-terracotta); margin: 0; }
+  .contact-form .btn-ghost { align-self: flex-start; }
+  .contact-form .btn-ghost:disabled { opacity: .6; cursor: default; }
+  .contact-status a { color: var(--color-ink-900); }
+  .contact-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .contact-status { font-family: var(--font-sans); font-size: 0.9375rem; line-height: 1.6; color: var(--color-ink-700); margin: 0; padding: 16px 18px; border: 1px solid var(--color-accent-seafoam); background: var(--color-bg-muted); }
+  .contact-aside { border-top: 1px solid var(--color-ink-300); padding-top: 24px; }
+  .contact-aside h2 { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 8px; }
+  .contact-aside p { font-size: 1rem; line-height: 1.6; color: var(--color-ink-700); margin: 0 0 24px; }
+  .contact-aside a { color: var(--color-ink-900); text-decoration: underline; text-underline-offset: 3px; }
+  .contact-aside a:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  @media (max-width: 899px) { .contact-grid { grid-template-columns: 1fr; gap: 48px; } }
+  /* ---------- Theme toggle (approved — appears on every §6 component artifact) ---------- */
+  .theme-toggle { justify-self: center; font-family: var(--font-sans); font-weight: 500; font-size: 0.8125rem; color: var(--color-ink-900); background: var(--color-bg-muted); border: 1px solid var(--color-ink-300); border-radius: 20px; padding: 8px 16px; cursor: pointer; }
+  .theme-toggle:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 2px; }
+
+  /* ---------- Footer (approved — appears on every page) ---------- */
+  .site-footer { border-top: 1px solid var(--color-ink-300); padding: 64px 0; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; align-items: last baseline; gap: 48px; flex-wrap: wrap; }
+  @media (min-width: 640px) { .footer-inner { padding: 0 80px; } }
+  .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: 280px; }
+  .footer-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
+  .footer-links-col { display: flex; flex-direction: column; }
+  .footer-links { display: flex; flex-direction: row; gap: 24px; margin: 0; padding: 0; list-style: none; }
+  .footer-links a { font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; }
+  .footer-links a:hover { text-decoration: underline; }
+  .footer-links a:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .footer-copyright { font-family: var(--font-sans); font-weight: 400; font-size: 0.8125rem; color: var(--color-ink-500); margin: 24px 0 0; }
+  @media (max-width: 767px) {
+    .site-footer { padding: 48px 0; }
+    .footer-inner { gap: 24px; }
+    .footer-copyright { margin-top: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><a class="wordmark" href="../index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a><p class="nav-role">UX/UI Designer</p></div>
+    <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
+    <ul class="nav-links">
+      <li><a href="../work/index.html">Work</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="index.html" class="is-active" aria-current="page">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <p class="eyebrow">Contact</p>
+    <h1>Let's work together</h1>
+    <p class="hero-description">Interested in working together, or just want to say hello? Send me a note and I'll get back to you.</p>
+  </section>
+
+  <section class="contact-page">
+    <div class="contact-grid">
+      <form class="contact-form" id="contact-form" novalidate>
+        <input type="checkbox" name="botcheck" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="contact-field" data-field="name">
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" name="name" autocomplete="name" required aria-describedby="err-name">
+          <p class="contact-field-error" id="err-name" hidden></p>
+        </div>
+        <div class="contact-field" data-field="email">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" name="email" autocomplete="email" required aria-describedby="err-email">
+          <p class="contact-field-error" id="err-email" hidden></p>
+        </div>
+        <div class="contact-field" data-field="message">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" rows="7" required aria-describedby="err-message"></textarea>
+          <p class="contact-field-error" id="err-message" hidden></p>
+        </div>
+        <button type="submit" class="btn-ghost">Send message</button>
+        <p class="contact-status" id="contact-status" role="status" hidden></p>
+      </form>
+
+      <aside class="contact-aside">
+        <h2>Email</h2>
+        <p><a href="mailto:orawannwcoders@gmail.com">orawannwcoders@gmail.com</a></p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="../index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a>
+      <p class="footer-role">UX/UI Designer</p>
+    </div>
+    <div class="footer-links-col">
+      <ul class="footer-links">
+        <li><a href="../work/index.html">Work</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="index.html">Contact</a></li>
+      </ul>
+      <p class="footer-copyright">© 2026 Orawan. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var toggle = document.getElementById('theme-toggle');
+
+    function getUrlTheme() {
+      var params = new URLSearchParams(window.location.search);
+      var t = params.get('theme');
+      return (t === 'dark' || t === 'light') ? t : null;
+    }
+
+    var urlTheme = getUrlTheme();
+    if (urlTheme) { root.setAttribute('data-theme', urlTheme); }
+
+    function isDarkNow() {
+      return root.getAttribute('data-theme') === 'dark';
+    }
+
+    function updateLabel() {
+      toggle.textContent = isDarkNow() ? 'Light' : 'Dark';
+    }
+
+    function propagateTheme() {
+      var current = root.getAttribute('data-theme');
+      var links = document.querySelectorAll('a[href^="https://claude.ai"]');
+      links.forEach(function (a) {
+        try {
+          var url = new URL(a.getAttribute('href'), window.location.href);
+          if (current === 'dark' || current === 'light') {
+            url.searchParams.set('theme', current);
+          } else {
+            url.searchParams.delete('theme');
+          }
+          a.setAttribute('href', url.toString());
+        } catch (e) {}
+      });
+    }
+
+    toggle.addEventListener('click', function () {
+      var current = root.getAttribute('data-theme');
+      if (current === 'dark') {
+        root.setAttribute('data-theme', 'light');
+      } else if (current === 'light') {
+        root.removeAttribute('data-theme');
+      } else {
+        root.setAttribute('data-theme', 'dark');
+      }
+      updateLabel();
+      propagateTheme();
+    });
+
+    updateLabel();
+    propagateTheme();
+  })();
+</script>
+<script>
+  (function () {
+    var form = document.getElementById('contact-form');
+    var status = document.getElementById('contact-status');
+    var WEB3FORMS_KEY = '90c31482-4c5a-444f-b374-a2e8bb918867'; // from web3forms.com — safe to keep in the page
+
+    function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return '&#' + c.charCodeAt(0) + ';'; }); }
+    function sendMessage(name, email, message, button, onDone) {
+      var subject = 'Portfolio contact from ' + name;
+      if (WEB3FORMS_KEY.indexOf('PASTE_') === 0) {
+        // No key yet: fall back to opening an email draft.
+        var body = message + '\n\n— ' + name + ' (' + email + ')';
+        window.location.href = 'mailto:orawannwcoders@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        onDone('draft');
+        return;
+      }
+      var hp = form.querySelector('input[name="botcheck"]');
+      if (hp && hp.checked) { onDone('sent'); return; }
+      var label = button.textContent;
+      button.disabled = true; button.textContent = 'Sending…';
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: subject, from_name: 'Orawan portfolio', name: name, email: email, message: message })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { onDone(d && d.success ? 'sent' : 'error'); })
+        .catch(function () { onDone('error'); })
+        .then(function () { button.disabled = false; button.textContent = label; });
+    }
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function setError(field, msg) {
+      var wrap = form.querySelector('[data-field="' + field + '"]');
+      var err = document.getElementById('err-' + field);
+      var input = wrap.querySelector('input, textarea');
+      if (msg) {
+        err.textContent = msg; err.hidden = false;
+        wrap.classList.add('has-error'); input.setAttribute('aria-invalid', 'true');
+      } else {
+        err.hidden = true; wrap.classList.remove('has-error'); input.removeAttribute('aria-invalid');
+      }
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('contact-name').value.trim();
+      var email = document.getElementById('contact-email').value.trim();
+      var message = document.getElementById('contact-message').value.trim();
+      var ok = true;
+
+      setError('name', name ? '' : 'Please enter your name.'); if (!name) ok = false;
+      if (!email) { setError('email', 'Please enter your email address.'); ok = false; }
+      else if (!emailPattern.test(email)) { setError('email', 'Please enter a valid email address.'); ok = false; }
+      else setError('email', '');
+      setError('message', message ? '' : 'Please write a message.'); if (!message) ok = false;
+
+      if (!ok) { status.hidden = true; var first = form.querySelector('.has-error input, .has-error textarea'); if (first) first.focus(); return; }
+
+      status.hidden = true;
+      sendMessage(name, email, message, form.querySelector('button[type="submit"]'), function (result) {
+        if (result === 'sent') { status.innerHTML = 'Thanks, ' + esc(name) + '! Your message was sent — I\'ll get back to you soon.'; form.reset(); }
+        else if (result === 'draft') { status.innerHTML = 'Your email app should open with your message ready to send. If nothing happens, email me directly at <a href="mailto:orawannwcoders@gmail.com">orawannwcoders@gmail.com</a>.'; }
+        else { status.innerHTML = 'Sorry, your message couldn\'t be sent. Please email me directly at <a href="mailto:orawannwcoders@gmail.com">orawannwcoders@gmail.com</a>.'; }
+        status.hidden = false;
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

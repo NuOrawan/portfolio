@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Work — Orawan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --color-bg-base: #F7F8F6;
+    --color-bg-muted: #EDEFEB;
+    --color-white: #FFFFFF;
+    --color-ink-900: #12181F;
+    --color-ink-700: #2B333C;
+    --color-ink-500: #6B7480;
+    --color-ink-300: #B7BEC6;
+    --color-accent-terracotta: #D99A7C;
+    --color-accent-seafoam: #A8CFC3;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  :root[data-theme="dark"] {
+    --color-bg-base: #12181F;
+    --color-bg-muted: #1B222B;
+    --color-ink-900: #F7F8F6;
+    --color-ink-700: #DADFE3;
+    --color-ink-500: #9AA3AD;
+    --color-ink-300: #3A424C;
+    --color-white: #12181F;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--color-bg-base); color: var(--color-ink-700); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; }
+
+  /* ---------- §6 Navigation (approved) ---------- */
+  .site-nav { position: sticky; top: 0; z-index: 50; background: var(--color-bg-base); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 20px 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
+  @media (min-width: 640px) { .nav-inner { padding: 24px 80px; } }
+  @media (max-width: 639px) { .nav-inner { grid-template-columns: 1fr auto; row-gap: 12px; } .nav-links { grid-column: 1 / -1; gap: 28px; } }
+  .wordmark { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
+  .wordmark:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .logo-badge { position: relative; flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; user-select: none; }
+  .logo-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .logo-badge span { position: relative; font-family: var(--font-sans); font-weight: 700; font-size: 14px; line-height: 1; letter-spacing: 1px; color: var(--color-bg-base); }
+  .logo-badge span .logo-o { color: var(--color-accent-terracotta); }
+  .logo-badge span .logo-a { color: var(--color-accent-seafoam); }
+  .wordmark-divider { width: 1px; height: 32px; background: var(--color-ink-300); flex: none; }
+  .wordmark-name { display: flex; flex-direction: column; gap: 2px; line-height: 1; }
+  .wordmark-name span { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 2px; color: var(--color-ink-900); }
+  .nav-brand { display: flex; flex-direction: column; align-items: center; gap: 8px; justify-self: start; }
+  .nav-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
+  .nav-links { display: flex; align-items: center; gap: 36px; margin: 0; padding: 0; list-style: none; }
+  .nav-links a { position: relative; font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; padding-bottom: 8px; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--color-ink-900); opacity: 0; transform: scaleX(0.4); transform-origin: left; transition: opacity .15s ease, transform .15s ease; }
+  .nav-links a:hover::after { opacity: .45; transform: scaleX(1); }
+  .nav-links a.is-active::after { opacity: 1; transform: scaleX(1); }
+  .nav-links a:focus-visible { outline: none; }
+  .nav-links a:focus-visible::after { opacity: 1; transform: scaleX(1); background: var(--color-accent-terracotta); height: 2px; }
+
+  main { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 640px) { main { padding: 0 80px; } }
+
+  /* ---------- Page hero (Work page — eyebrow + heading, no CTA) ---------- */
+  .page-hero { padding: 64px 0 48px; }
+  .page-hero .eyebrow { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 16px; }
+  .page-hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.25rem, 1.6rem + 3.2vw, 4.5rem); letter-spacing: -0.5px; line-height: 1.15; color: var(--color-ink-900); margin: 0 0 24px; max-width: 16ch; text-wrap: balance; }
+  .page-hero .hero-description { font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-700); max-width: 34rem; margin: 0; }
+
+  /* ---------- §6 Buttons (approved) ---------- */
+  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-ink-300); background: transparent; color: var(--color-ink-900); font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.5px; padding: 15px 28px; border-radius: 0; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
+  .btn-ghost:hover { background: var(--color-ink-900); color: var(--color-bg-base); border-color: var(--color-ink-900); }
+  .btn-ghost:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+
+  /* ---------- Work — editorial list (all projects, no expand button) ---------- */
+  #work-list-section { padding: 0 0 96px; }
+  .work-list { display: flex; flex-direction: column; gap: 96px; margin: 0; }
+  .work-item { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; text-decoration: none; color: inherit; }
+  .work-item .work-media { order: 1; }
+  .work-item .work-text { order: 2; }
+  .work-item.work-item--reverse { margin-top: 32px; }
+  .work-item.work-item--reverse .work-media { order: 2; }
+  .work-item.work-item--reverse .work-text { order: 1; }
+  .work-item:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 6px; }
+  /* ---------- Fit-to-content image sizing (page-specific override, Oct 2026 — No Fuss Meal Plan & PrepMate only) ---------- */
+  .work-item--fit-content { align-items: stretch; }
+  .work-item--fit-content .work-mockup-area { height: 100%; }
+  /* ---------- Even inset between border and image (page-specific override, Oct 2026 — FAAC & Ivy Growth Group only) ---------- */
+  .work-item--padded-media .work-mockup-area--image { padding: 16px; }
+  @media (max-width: 767px) {
+    .work-list { gap: 64px; }
+    .work-item, .work-item.work-item--reverse { grid-template-columns: 1fr; gap: 24px; margin-top: 0; }
+    .work-item .work-media, .work-item.work-item--reverse .work-media { order: 1; }
+    .work-item .work-text, .work-item.work-item--reverse .work-text { order: 2; }
+  }
+  .work-number { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; color: var(--color-ink-500); margin: 0 0 8px; }
+  .work-title { position: relative; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.75rem, 1.4rem + 1.8vw, 2.75rem); letter-spacing: -0.25px; color: var(--color-ink-900); margin: 0 0 12px; }
+  .work-title .highlight { position: relative; white-space: nowrap; }
+  .work-title .highlight::before { content: ""; position: absolute; left: -6%; width: clamp(80px, 112%, 160px); top: 50%; bottom: 0%; z-index: -1; background-repeat: no-repeat; background-size: 100% 100%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='r1' x='-15%25' y='-40%25' width='130%25' height='180%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.35' numOctaves='2' seed='11' result='edgeNoise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='edgeNoise' scale='11' xChannelSelector='R' yChannelSelector='G' result='displaced'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.18 0.5' numOctaves='2' seed='4' result='grain'/%3E%3CfeColorMatrix in='grain' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.15 1.15 1.15 0 -0.22' result='grainAlpha'/%3E%3CfeComposite in='displaced' in2='grainAlpha' operator='in'/%3E%3C/filter%3E%3C/defs%3E%3Crect x='8' y='15' width='384' height='30' rx='4' fill='%23A8CFC3' filter='url(%23r1)'/%3E%3C/svg%3E"); }
+  .work-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 16px; }
+  .work-description { font-size: 1rem; line-height: 1.6; color: var(--color-ink-700); max-width: 32rem; margin: 0; }
+
+  /* ---------- Work mockup (device collage — "work-" scoped separately from the Project card's "card-" versions) ---------- */
+  .work-mockup-area { position: relative; width: 100%; max-width: 440px; height: 340px; margin: 0 auto; }
+  .work-mockup-area--image { border-radius: 8px; overflow: hidden; background: var(--color-bg-base); border: 1px solid var(--color-ink-300); }
+  .work-mockup-area--image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .work-device-monitor { position: absolute; left: 4%; top: 8%; width: 66%; transform: rotate(-3deg); z-index: 1; }
+  .work-monitor-screen { background: var(--color-ink-900); border-radius: 12px; padding: 10px 10px 20px; box-shadow: 0 28px 40px -22px rgba(18, 24, 31, 0.4); }
+  .work-monitor-stand { width: 30%; height: 12px; margin: 0 auto; background: var(--color-ink-900); border-radius: 0 0 5px 5px; }
+  .work-monitor-inner { background: var(--color-white); border-radius: 4px; aspect-ratio: 16/11; overflow: hidden; display: flex; flex-direction: column; }
+  .work-monitor-nav { height: 16%; background: var(--color-bg-muted); display: flex; align-items: center; gap: 5px; padding: 0 8%; flex: none; }
+  .work-monitor-nav span { width: 6px; height: 6px; border-radius: 50%; background: var(--color-ink-300); }
+  .work-monitor-content { flex: 1; display: flex; gap: 4%; padding: 8%; }
+  .work-monitor-block { flex: 1; border-radius: 4px; }
+  .work-device-phone-overlap { position: absolute; right: 0%; bottom: -8%; width: 28%; transform: rotate(7deg); z-index: 2; }
+  .work-device-phone-fan { position: absolute; width: 32%; top: 6%; }
+  .work-device-phone-fan.fan-1 { left: 2%; top: 18%; transform: rotate(-13deg); z-index: 1; }
+  .work-device-phone-fan.fan-2 { left: 34%; top: 0%; transform: rotate(3deg); z-index: 3; }
+  .work-device-phone-fan.fan-3 { left: 66%; top: 18%; transform: rotate(13deg); z-index: 2; }
+  .work-phone-frame { background: var(--color-ink-900); border-radius: 18px; padding: 7px; box-shadow: 0 22px 34px -18px rgba(18, 24, 31, 0.4); }
+  .work-phone-screen { background: var(--color-white); border-radius: 13px; aspect-ratio: 9/18.5; position: relative; overflow: hidden; padding: 12% 10%; display: flex; flex-direction: column; gap: 8%; }
+  .work-phone-notch { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 26%; height: 3%; border-radius: 3px; background: var(--color-ink-300); }
+  .work-row-dot { display: flex; align-items: center; gap: 6%; }
+  .work-row-dot .dot { width: 16%; aspect-ratio: 1; border-radius: 50%; flex: none; }
+  .work-row-dot .line { height: 12%; border-radius: 2px; flex: 1; }
+  .work-phone-line { height: 8%; border-radius: 2px; }
+  .work-phone-fill { border-radius: 4px; flex: none; }
+  .work-phone-ring { width: 44%; aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--color-accent-terracotta); margin: auto; }
+
+  /* ---------- Theme toggle (approved — appears on every §6 component artifact) ---------- */
+  .theme-toggle { justify-self: center; font-family: var(--font-sans); font-weight: 500; font-size: 0.8125rem; color: var(--color-ink-900); background: var(--color-bg-muted); border: 1px solid var(--color-ink-300); border-radius: 20px; padding: 8px 16px; cursor: pointer; }
+  .theme-toggle:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 2px; }
+
+  /* ---------- Footer (approved — appears on every page) ---------- */
+  .site-footer { border-top: 1px solid var(--color-ink-300); padding: 64px 0; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; align-items: last baseline; gap: 48px; flex-wrap: wrap; }
+  @media (min-width: 640px) { .footer-inner { padding: 0 80px; } }
+  .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: 280px; }
+  .footer-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
+  .footer-links-col { display: flex; flex-direction: column; }
+  .footer-links { display: flex; flex-direction: row; gap: 24px; margin: 0; padding: 0; list-style: none; }
+  .footer-links a { font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; }
+  .footer-links a:hover { text-decoration: underline; }
+  .footer-links a:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .footer-copyright { font-family: var(--font-sans); font-weight: 400; font-size: 0.8125rem; color: var(--color-ink-500); margin: 24px 0 0; }
+  @media (max-width: 767px) {
+    .site-footer { padding: 48px 0; }
+    .footer-inner { gap: 24px; }
+    .footer-copyright { margin-top: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><a class="wordmark" href="../index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a><p class="nav-role">UX/UI Designer</p></div>
+    <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="is-active">Work</a></li>
+      <li><a href="../about/index.html">About</a></li>
+      <li><a href="../contact/index.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <p class="eyebrow">Work</p>
+    <h1>All Work</h1>
+    <p class="hero-description">Every project I've designed, from early explorations to shipped products.</p>
+  </section>
+
+  <section id="work-list-section">
+    <div class="work-list">
+
+      <!-- 01 No Fuss Meal Plan -->
+      <a class="work-item work-item--reverse work-item--fit-content" href="../case-studies/no-fuss-meal-plan/index.html">
+        <div class="work-media">
+          <div class="work-mockup-area work-mockup-area--image">
+            <img src="images/project-cards/nofussmealplan-card.webp" alt="No Fuss Meal Plan case-study hero preview">
+          </div>
+        </div>
+        <div class="work-text">
+          <p class="work-number">01</p>
+          <h3 class="work-title"><span class="highlight">No Fuss Meal Plan</span></h3>
+          <p class="work-role">UX Research, Case Study</p>
+          <p class="work-description">A streamlined meal-planning experience for busy users — from quick onboarding to weekly plans and grocery-ready lists — designed to reduce decision fatigue and keep healthy eating realistic.</p>
+        </div>
+      </a>
+
+      <!-- 02 Ivy Growth Group -->
+      <a class="work-item work-item--padded-media" href="../case-studies/ivy-growth-group/index.html">
+        <div class="work-media">
+          <div class="work-mockup-area work-mockup-area--image" style="height: 262.5px;">
+            <img src="images/project-cards/ivygrowthgroup-card-work.webp" alt="Ivy Growth Group case-study hero preview">
+          </div>
+        </div>
+        <div class="work-text">
+          <p class="work-number">02</p>
+          <h3 class="work-title"><span class="highlight">Ivy Growth Group</span></h3>
+          <p class="work-role">Heuristic Review</p>
+          <p class="work-description">A heuristic evaluation of the Ivy Growth Group marketing site against Nielsen's usability heuristics, surfacing fixes to navigation feedback, form validation, and error recovery.</p>
+        </div>
+      </a>
+
+      <!-- 03 PrepMate -->
+      <a class="work-item work-item--reverse work-item--fit-content" href="../case-studies/prepmate/index.html">
+        <div class="work-media">
+          <div class="work-mockup-area work-mockup-area--image">
+            <img src="images/project-cards/prepmate-card.webp" alt="PrepMate case-study hero preview">
+          </div>
+        </div>
+        <div class="work-text">
+          <p class="work-number">03</p>
+          <h3 class="work-title"><span class="highlight">PrepMate</span></h3>
+          <p class="work-role">UX/UI Designer, Case Study</p>
+          <p class="work-description">A mobile app that turns emergency preparedness from a daunting, fear-driven task into a structured, achievable process — guiding people through a personalized plan instead of a generic checklist.</p>
+        </div>
+      </a>
+
+      <!-- 04 FAAC -->
+      <a class="work-item work-item--padded-media" href="../case-studies/faac/index.html">
+        <div class="work-media">
+          <div class="work-mockup-area work-mockup-area--image" style="height: 305px;">
+            <img src="images/project-cards/faac-card-work.webp" alt="FAAC case-study hero preview">
+          </div>
+        </div>
+        <div class="work-text">
+          <p class="work-number">04</p>
+          <h3 class="work-title"><span class="highlight">FAAC</span></h3>
+          <p class="work-role">Web Design</p>
+          <p class="work-description">A website redesign for the Fine Arts Advisory Council that replaces a cluttered, unresponsive layout with streamlined navigation and clear calls to action — making it effortless for parents, teachers, donors, and volunteers to get involved.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="../index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a>
+      <p class="footer-role">UX/UI Designer</p>
+    </div>
+    <div class="footer-links-col">
+      <ul class="footer-links">
+        <li><a href="index.html">Work</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="../contact/index.html">Contact</a></li>
+      </ul>
+      <p class="footer-copyright">© 2026 Orawan. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var toggle = document.getElementById('theme-toggle');
+
+    function getUrlTheme() {
+      var params = new URLSearchParams(window.location.search);
+      var t = params.get('theme');
+      return (t === 'dark' || t === 'light') ? t : null;
+    }
+
+    var urlTheme = getUrlTheme();
+    if (urlTheme) { root.setAttribute('data-theme', urlTheme); }
+
+    function isDarkNow() {
+      return root.getAttribute('data-theme') === 'dark';
+    }
+
+    function updateLabel() {
+      toggle.textContent = isDarkNow() ? 'Light' : 'Dark';
+    }
+
+    function propagateTheme() {
+      var current = root.getAttribute('data-theme');
+      var links = document.querySelectorAll('a[href^="https://claude.ai"]');
+      links.forEach(function (a) {
+        try {
+          var url = new URL(a.getAttribute('href'), window.location.href);
+          if (current === 'dark' || current === 'light') {
+            url.searchParams.set('theme', current);
+          } else {
+            url.searchParams.delete('theme');
+          }
+          a.setAttribute('href', url.toString());
+        } catch (e) {}
+      });
+    }
+
+    toggle.addEventListener('click', function () {
+      var current = root.getAttribute('data-theme');
+      if (current === 'dark') {
+        root.setAttribute('data-theme', 'light');
+      } else if (current === 'light') {
+        root.removeAttribute('data-theme');
+      } else {
+        root.setAttribute('data-theme', 'dark');
+      }
+      updateLabel();
+      propagateTheme();
+    });
+
+    updateLabel();
+    propagateTheme();
+  })();
+</script>
+
+</body>
+</html>

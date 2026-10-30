@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ivy Growth Group — UX Audit — Orawan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --color-bg-base: #F7F8F6;
+    --color-bg-muted: #EDEFEB;
+    --color-white: #FFFFFF;
+    --color-ink-900: #12181F;
+    --color-ink-700: #2B333C;
+    --color-ink-500: #6B7480;
+    --color-ink-300: #B7BEC6;
+    --color-accent-terracotta: #D99A7C;
+    --color-accent-seafoam: #A8CFC3;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  :root[data-theme="dark"] {
+    --color-bg-base: #12181F;
+    --color-bg-muted: #1B222B;
+    --color-ink-900: #F7F8F6;
+    --color-ink-700: #DADFE3;
+    --color-ink-500: #9AA3AD;
+    --color-ink-300: #3A424C;
+    --color-white: #12181F;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--color-bg-base); color: var(--color-ink-700); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; }
+
+  /* ---------- §6 Navigation (approved) ---------- */
+  .site-nav { position: sticky; top: 0; z-index: 50; background: var(--color-bg-base); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 20px 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
+  @media (min-width: 640px) { .nav-inner { padding: 24px 80px; } }
+  @media (max-width: 639px) { .nav-inner { grid-template-columns: 1fr auto; row-gap: 12px; } .nav-links { grid-column: 1 / -1; gap: 28px; } }
+  .wordmark { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
+  .wordmark:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .logo-badge { position: relative; flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; user-select: none; }
+  .logo-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .logo-badge span { position: relative; font-family: var(--font-sans); font-weight: 700; font-size: 14px; line-height: 1; letter-spacing: 1px; color: var(--color-bg-base); }
+  .logo-badge span .logo-o { color: var(--color-accent-terracotta); }
+  .logo-badge span .logo-a { color: var(--color-accent-seafoam); }
+  .wordmark-divider { width: 1px; height: 32px; background: var(--color-ink-300); flex: none; }
+  .wordmark-name { display: flex; flex-direction: column; gap: 2px; line-height: 1; }
+  .wordmark-name span { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 2px; color: var(--color-ink-900); }
+  .nav-brand { display: flex; flex-direction: column; align-items: center; gap: 8px; justify-self: start; }
+  .nav-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
+  .nav-links { display: flex; align-items: center; gap: 36px; margin: 0; padding: 0; list-style: none; }
+  .nav-links a { position: relative; font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; padding-bottom: 8px; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--color-ink-900); opacity: 0; transform: scaleX(0.4); transform-origin: left; transition: opacity .15s ease, transform .15s ease; }
+  .nav-links a:hover::after { opacity: .45; transform: scaleX(1); }
+  .nav-links a.is-active::after { opacity: 1; transform: scaleX(1); }
+  .nav-links a:focus-visible { outline: none; }
+  .nav-links a:focus-visible::after { opacity: 1; transform: scaleX(1); background: var(--color-accent-terracotta); height: 2px; }
+
+  /* ---------- §6 Buttons (approved) ---------- */
+  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-ink-300); background: transparent; color: var(--color-ink-900); font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.5px; padding: 15px 28px; border-radius: 0; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
+  .btn-ghost:hover { background: var(--color-ink-900); color: var(--color-bg-base); border-color: var(--color-ink-900); }
+  .btn-ghost:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+
+  /* ---------- §6 Case-study hero (approved, verbatim) ---------- */
+  .hero { max-width: 1280px; margin: 0 auto; padding: 56px 24px 96px; display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+  @media (min-width: 640px) { .hero { padding: 72px 80px 128px; } }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; gap: 56px; padding-top: 40px; } }
+  .hero-eyebrow { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 20px; }
+  .hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.25rem, 1.6rem + 3.2vw, 5rem); letter-spacing: -0.5px; line-height: 1.15; color: var(--color-ink-900); margin: 0 0 24px; text-wrap: balance; }
+  .hero-description { font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-700); max-width: 34rem; margin: 0 0 40px; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 32px; margin: 0 0 40px; padding: 0; list-style: none; }
+  .meta-row dt { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 6px; }
+  .meta-row dd { font-family: var(--font-sans); font-size: 0.9375rem; color: var(--color-ink-900); margin: 0; }
+  .mockup-area { position: relative; width: 100%; max-width: 460px; height: 420px; margin: 0 auto; }
+  /* ---------- Ivy Growth Group hero redesign (page-specific, Oct 2026) — full-bleed desktop screenshot + framed phone overlay ---------- */
+  .hero-full-bleed { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; box-shadow: 0 30px 50px -24px rgba(18, 24, 31, 0.38); }
+  .hero-full-bleed__desktop { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .hero-full-bleed__phone { position: absolute; right: -6%; top: 20%; width: 22%; z-index: 2; filter: drop-shadow(0 20px 30px rgba(18, 24, 31, 0.35)); }
+  @media (max-width: 860px) { .mockup-area { height: 320px; max-width: 360px; } }
+  .device-phone-fan { position: absolute; width: 34%; top: 6%; }
+  .device-phone-fan.fan-1 { left: 2%; top: 16%; transform: rotate(-14deg); z-index: 1; }
+  .device-phone-fan.fan-2 { left: 33%; top: 0%; transform: rotate(3deg); z-index: 3; }
+  .device-phone-fan.fan-3 { left: 64%; top: 16%; transform: rotate(14deg); z-index: 2; }
+  .phone-frame { background: var(--color-ink-900); border-radius: 20px; padding: 7px; box-shadow: 0 26px 40px -18px rgba(18, 24, 31, 0.42); }
+  .phone-screen { background: var(--color-white); border-radius: 14px; aspect-ratio: 9/18.5; position: relative; overflow: hidden; padding: 11% 9%; display: flex; flex-direction: column; gap: 8%; }
+  .phone-notch { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 26%; height: 2.5%; border-radius: 3px; background: var(--color-ink-300); }
+  .row-dot { display: flex; align-items: center; gap: 6%; }
+  .row-dot .dot { width: 16%; aspect-ratio: 1; border-radius: 50%; flex: none; }
+  .row-dot .line { height: 12%; border-radius: 2px; flex: 1; }
+  .phone-line { height: 7%; border-radius: 2px; }
+  .phone-fill { border-radius: 4px; flex: none; }
+  .phone-ring { width: 42%; aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--color-accent-terracotta); margin: auto; }
+
+  /* ---------- Hero device monitor (template variant — desktop/browser mockup for hero) ---------- */
+  .hero-device-monitor { position: absolute; left: 4%; top: 6%; width: 68%; transform: rotate(-2deg); z-index: 1; }
+  .hero-monitor-screen { background: var(--color-ink-900); border-radius: 14px; padding: 12px 12px 24px; box-shadow: 0 30px 44px -22px rgba(18, 24, 31, 0.42); }
+  .hero-monitor-stand { width: 28%; height: 14px; margin: 0 auto; background: var(--color-ink-900); border-radius: 0 0 6px 6px; }
+  .hero-monitor-inner { background: var(--color-white); border-radius: 5px; aspect-ratio: 16/10; overflow: hidden; display: flex; flex-direction: column; }
+  .hero-monitor-nav { height: 14%; background: var(--color-bg-muted); display: flex; align-items: center; gap: 6px; padding: 0 6%; flex: none; }
+  .hero-monitor-nav span { width: 7px; height: 7px; border-radius: 50%; background: var(--color-ink-300); }
+  .hero-monitor-content { flex: 1; display: flex; flex-direction: column; gap: 8%; padding: 8%; }
+  .hero-monitor-block { border-radius: 4px; }
+  .hero-device-phone-overlap { position: absolute; right: 0%; bottom: -6%; width: 26%; transform: rotate(8deg); z-index: 2; }
+
+  /* ---------- Section eyebrow + divider (approved, from Stepper components) ---------- */
+  .section-kicker { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; }
+  .section-kicker .rule { width: 28px; height: 1px; background: var(--color-ink-500); flex: none; }
+  .section-kicker span:last-child { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); }
+
+  /* ---------- §6 Table of contents sidebar (approved, verbatim) ---------- */
+  .process-page { max-width: 1280px; margin: 0 auto; padding: 0 24px 40px; }
+  @media (min-width: 640px) { .process-page { padding: 0 80px 40px; } }
+  .process-grid { display: grid; grid-template-columns: minmax(84px, 168px) 1fr; gap: 20px; align-items: start; }
+  @media (min-width: 640px) { .process-grid { gap: 48px; } }
+  .toc-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+  .steps-content { min-width: 0; }
+  .toc-item { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-300); transition: color 0.2s ease; }
+  .toc-item.is-current { color: var(--color-ink-900); }
+  .toc-item:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .toc-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--color-ink-300); background: transparent; flex: none; transition: background-color 0.2s ease, border-color 0.2s ease; }
+  .toc-item.is-current .toc-dot { background: var(--color-accent-terracotta); border-color: var(--color-accent-terracotta); }
+  .step-section { min-height: 30vh; display: flex; flex-direction: column; justify-content: center; padding: 12px 0; }
+  .step-section:not(:first-of-type) { border-top: 1px solid var(--color-ink-300); margin-top: 32px; padding-top: 32px; }
+  .step-current-label { display: block; font-family: var(--font-sans); font-weight: 700; font-size: 1.5rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--color-ink-900); margin-bottom: 28px; }
+  .step-section h3 { font-family: var(--font-sans); font-weight: 600; font-size: 1.375rem; color: var(--color-ink-900); margin: 0 0 16px; }
+  .step-section p { font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-700); margin: 0 0 32px; max-width: 34rem; }
+  blockquote { font-family: var(--font-display); font-style: italic; font-size: 1.375rem; line-height: 1.5; color: var(--color-ink-900); max-width: 34rem; margin: 0 0 32px; padding: 0; }
+
+  /* ---------- Audit findings (template variant — severity indicated by ink-scale shade, no new colors) ---------- */
+  .finding { margin: 0 0 32px; }
+  .finding:last-child { margin-bottom: 0; }
+  .finding-severity { font-family: var(--font-sans); font-weight: 700; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 8px; }
+  .finding-severity.is-critical { color: var(--color-ink-900); }
+  .finding-severity.is-moderate { color: var(--color-ink-700); }
+  .finding-severity.is-minor { color: var(--color-ink-500); }
+  .recommendation-list { margin: 0 0 32px; padding-left: 20px; max-width: 34rem; }
+  .recommendation-list li { font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-700); margin: 0 0 12px; }
+
+
+  /* ---------- Audit finding with screenshot (real-content variant, approved) ---------- */
+  .finding-detail { margin: 0 0 48px; }
+  .finding-detail:last-child { margin-bottom: 0; }
+  .finding-detail h3 { font-family: var(--font-sans); font-weight: 600; font-size: 1.375rem; color: var(--color-ink-900); margin: 0 0 20px; }
+  .finding-detail__media { border: 1px solid var(--color-ink-300); border-radius: 2px; overflow: hidden; margin: 0 0 24px; max-width: 34rem; box-shadow: 0 26px 40px -18px rgba(18, 24, 31, 0.42); }
+  :root[data-theme="dark"] .finding-detail__media { box-shadow: none; }
+  .finding-detail__media img { display: block; width: 100%; height: auto; }
+  .finding-detail__block { display: flex; gap: 24px; margin: 0 0 16px; max-width: 34rem; }
+  .finding-detail__block-label { flex: none; width: 148px; font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--color-ink-500); padding-top: 9px; white-space: nowrap; }
+  .finding-detail__block-icon { width: 12px; height: 12px; margin-right: 6px; vertical-align: -1.5px; color: var(--color-accent-terracotta); }
+  .finding-detail__block p { font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-700); margin: 0; }
+  @media (max-width: 560px) {
+    .finding-detail__block { flex-direction: column; gap: 8px; }
+    .finding-detail__block-label { width: auto; }
+  }
+
+  /* ---------- §6 Project card (approved, verbatim) — "more to explore" ---------- */
+  .highlight { position: relative; white-space: nowrap; }
+  .work-intro h2 .highlight::before { content: ""; position: absolute; left: -6%; width: clamp(80px, 112%, 160px); top: 50%; bottom: 0%; z-index: -1; background-repeat: no-repeat; background-size: 100% 100%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='r1' x='-15%25' y='-40%25' width='130%25' height='180%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.35' numOctaves='2' seed='11' result='edgeNoise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='edgeNoise' scale='11' xChannelSelector='R' yChannelSelector='G' result='displaced'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.18 0.5' numOctaves='2' seed='4' result='grain'/%3E%3CfeColorMatrix in='grain' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.15 1.15 1.15 0 -0.22' result='grainAlpha'/%3E%3CfeComposite in='displaced' in2='grainAlpha' operator='in'/%3E%3C/filter%3E%3C/defs%3E%3Crect x='8' y='15' width='384' height='30' rx='4' fill='%23A8CFC3' filter='url(%23r1)'/%3E%3C/svg%3E"); }
+  .work-intro { max-width: 1180px; margin: 0 auto; padding: 40px 24px 140px; }
+  @media (min-width: 640px) { .work-intro { padding: 40px 40px 160px; } }
+  .work-intro h2 { position: relative; display: inline-block; font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 1.5rem + 2.2vw, 3.25rem); letter-spacing: -0.5px; line-height: 1.15; color: var(--color-ink-900); margin: 0; text-wrap: balance; }
+  .work-intro .kicker { font-family: var(--font-sans); font-weight: 400; font-size: 1rem; color: var(--color-ink-500); margin: 20px 0 0; }
+  .card-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 48px; }
+  @media (min-width: 768px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+  .project-card { display: flex; flex-direction: column; align-items: center; border: 1px solid var(--color-ink-300); border-radius: 2px; padding: 32px 24px 24px; width: 100%; max-width: 300px; margin: 0 auto; text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .project-card:hover { transform: translateY(-4px); border-color: var(--color-ink-900); box-shadow: 0 20px 36px -22px rgba(18, 24, 31, 0.35); }
+  .project-card:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 4px; }
+  .card-mockup-area { position: relative; width: 100%; height: 160px; margin-bottom: 40px; }
+  .card-device-monitor { position: absolute; left: 6%; top: 12%; width: 62%; transform: rotate(-3deg); z-index: 1; }
+  .card-monitor-screen { background: var(--color-ink-900); border-radius: 10px; padding: 8px 8px 16px; box-shadow: 0 24px 34px -20px rgba(18, 24, 31, 0.4); }
+  .card-monitor-stand { width: 30%; height: 10px; margin: 0 auto; background: var(--color-ink-900); border-radius: 0 0 4px 4px; }
+  .card-monitor-inner { background: var(--color-white); border-radius: 3px; aspect-ratio: 16/11; overflow: hidden; display: flex; flex-direction: column; }
+  .card-monitor-nav { height: 16%; background: var(--color-bg-muted); display: flex; align-items: center; gap: 4px; padding: 0 8%; flex: none; }
+  .card-monitor-nav span { width: 5px; height: 5px; border-radius: 50%; background: var(--color-ink-300); }
+  .card-monitor-content { flex: 1; display: flex; gap: 4%; padding: 8%; }
+  .card-monitor-block { flex: 1; border-radius: 3px; }
+  .card-device-phone-overlap { position: absolute; right: 2%; bottom: -6%; width: 26%; transform: rotate(7deg); z-index: 2; }
+  .card-phone-frame { background: var(--color-ink-900); border-radius: 16px; padding: 6px; box-shadow: 0 18px 28px -16px rgba(18, 24, 31, 0.4); }
+  .card-phone-screen { background: var(--color-white); border-radius: 11px; aspect-ratio: 9/18.5; position: relative; overflow: hidden; padding: 12% 10%; display: flex; flex-direction: column; gap: 8%; }
+  .card-phone-notch { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 26%; height: 3%; border-radius: 3px; background: var(--color-ink-300); }
+  .card-phone-line { height: 8%; border-radius: 2px; }
+  .card-phone-fill { border-radius: 4px; flex: none; }
+  .card-mockup-area--image { border-radius: 8px; overflow: hidden; background: var(--color-bg-base); }
+  .card-mockup-area--image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .card-title { font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; color: var(--color-ink-900); margin: 0 0 8px; text-align: center; }
+  .card-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0; text-align: center; min-height: 28px; }
+
+  /* ---------- Theme toggle (approved — appears on every §6 component artifact) ---------- */
+  .theme-toggle { justify-self: center; font-family: var(--font-sans); font-weight: 500; font-size: 0.8125rem; color: var(--color-ink-900); background: var(--color-bg-muted); border: 1px solid var(--color-ink-300); border-radius: 20px; padding: 8px 16px; cursor: pointer; }
+  .theme-toggle:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 2px; }
+
+  /* ---------- Footer (approved — appears on every page) ---------- */
+  .site-footer { border-top: 1px solid var(--color-ink-300); padding: 64px 0; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; align-items: last baseline; gap: 48px; flex-wrap: wrap; }
+  @media (min-width: 640px) { .footer-inner { padding: 0 80px; } }
+  .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: 280px; }
+  .footer-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
+  .footer-links-col { display: flex; flex-direction: column; }
+  .footer-links { display: flex; flex-direction: row; gap: 24px; margin: 0; padding: 0; list-style: none; }
+  .footer-links a { font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; }
+  .footer-links a:hover { text-decoration: underline; }
+  .footer-links a:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .footer-copyright { font-family: var(--font-sans); font-weight: 400; font-size: 0.8125rem; color: var(--color-ink-500); margin: 24px 0 0; }
+  @media (max-width: 767px) {
+    .site-footer { padding: 48px 0; }
+    .footer-inner { gap: 24px; }
+    .footer-copyright { margin-top: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><a class="wordmark" href="../../index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a><p class="nav-role">UX/UI Designer</p></div>
+    <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
+    <ul class="nav-links">
+      <li><a href="../../work/index.html" class="is-active">Work</a></li>
+      <li><a href="../../about/index.html">About</a></li>
+      <li><a href="../../contact/index.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">2026 — UX Audit</p>
+    <h1>Ivy Growth Group</h1>
+    <p class="hero-description">A heuristic evaluation of the Ivy Growth Group marketing site against Jakob Nielsen&rsquo;s 10 usability heuristics, surfacing issues in navigation feedback, form validation, and error recovery that affect trust and conversion.</p>
+    <dl class="meta-row">
+      <div><dt>Role</dt><dd>UX Researcher</dd></div>
+      <div><dt>Scope</dt><dd>4 screens</dd></div>
+      <div><dt>Read time</dt><dd>4 min</dd></div>
+    </dl>
+  </div>
+  <div class="hero-media">
+    <div class="hero-full-bleed">
+      <img class="hero-full-bleed__desktop" src="images/reviews/ivy-homepage.webp" alt="Ivy Growth Group marketing site homepage">
+      <div class="hero-full-bleed__phone">
+        <div class="phone-frame">
+          <div class="phone-screen" style="padding: 0; display: block;">
+            <img src="images/reviews/ivy-homepage-mobile.webp" alt="Ivy Growth Group marketing site homepage, mobile view" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block;">
+            <span class="phone-notch"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="process-page">
+  <div class="section-kicker"><span class="rule"></span><span>The Audit</span></div>
+
+
+  <div class="process-grid">
+    <aside class="toc-sidebar" aria-label="Process steps">
+      <a class="toc-item is-current" href="#step-scope" data-step="scope"><span class="toc-dot"></span><span>Scope</span></a>
+      <a class="toc-item" href="#step-findings" data-step="findings"><span class="toc-dot"></span><span>Findings</span></a>
+      <a class="toc-item" href="#step-recommendations" data-step="recommendations"><span class="toc-dot"></span><span>Recommendations</span></a>
+    </aside>
+
+    <div class="steps-content">
+      <section class="step-section" id="step-scope">
+        <span class="step-current-label">01. Scope</span>
+        <h3>Audit Scope &amp; Methodology</h3>
+        <p>This audit evaluates the Ivy Growth Group marketing website against Jakob Nielsen&rsquo;s 10 usability heuristics, identifying usability issues and prioritizing the improvements with the highest impact on trust and conversion.</p>
+        <h3>What Was Reviewed</h3>
+        <p>The FAQ page, the Connect contact form, the Services page, and the post-submission confirmation state.</p>
+      </section>
+
+      <section class="step-section" id="step-findings">
+        <span class="step-current-label">02. Findings</span>
+
+        <div class="finding-detail">
+          <p class="finding-severity is-critical">Critical</p>
+          <h3>Connect Interface &mdash; Error Prevention</h3>
+          <figure class="finding-detail__media">
+            <img src="images/reviews/ivy-contact-form.jpg" alt="Ivy Growth Group Connect page contact form" loading="lazy">
+          </figure>
+          <div class="finding-detail__block">
+            <span class="finding-detail__block-label"><svg class="finding-detail__block-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>Observation</span>
+            <p>The Connect interface lacks explicit signifiers for mandatory fields and real-time input validation, increasing the risk of frustration and incomplete submissions.</p>
+          </div>
+          <div class="finding-detail__block">
+            <span class="finding-detail__block-label"><svg class="finding-detail__block-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V17h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 3z"/></svg>Recommendation</span>
+            <p>Add explicit required-field markers and real-time validation to prevent incomplete submissions, matching the site&apos;s &quot;efficient and effective&quot; brand promise.</p>
+          </div>
+        </div>
+
+        <div class="finding-detail">
+          <p class="finding-severity is-critical">Critical</p>
+          <h3>Recognize, Diagnose, and Recover from Errors</h3>
+          <figure class="finding-detail__media">
+            <img src="images/reviews/ivy-confirmation.jpg" alt="Ivy Growth Group Connect page message received confirmation" loading="lazy">
+          </figure>
+          <div class="finding-detail__block">
+            <span class="finding-detail__block-label"><svg class="finding-detail__block-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>Observation</span>
+            <p>There is no visible framework for error or &quot;dead-end&quot; states; a broken link or failed form submission could leave a high-value lead stranded without guidance.</p>
+          </div>
+          <div class="finding-detail__block">
+            <span class="finding-detail__block-label"><svg class="finding-detail__block-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V17h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 3z"/></svg>Recommendation</span>
+            <p>Design a clear error state using plain, non-technical language and a direct path back to essential pages.</p>
+          </div>
+        </div>
+
+        <div class="finding-detail">
+          <p class="finding-severity is-moderate">Moderate</p>
+          <h3>Global Navigation &mdash; Visibility of System Status</h3>
+          <figure class="finding-detail__media">
+            <img src="images/reviews/ivy-faq.jpg" alt="Ivy Growth Group FAQ page with expanded and collapsed question cards" loading="lazy">
+          </figure>
+          <div class="finding-detail__block">
+            <span class="finding-detail__block-label"><svg class="finding-detail__block-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>Observation</span>
+            <p>The global navigation lacks a persistent &quot;active&quot; state, which creates unnecessary cognitive friction for users navigating detailed sections like the FAQ.</p>
+          </div>
+          <div class="finding-detail__block">
+            <span class="finding-detail__block-label"><svg class="finding-detail__block-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V17h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 3z"/></svg>Recommendation</span>
+            <p>Add a high-contrast active-state indicator to the navigation so users always know where they are as they explore different pages.</p>
+          </div>
+        </div>
+
+        <div class="finding-detail">
+          <p class="finding-severity is-minor">Minor</p>
+          <h3>Recognition Rather Than Recall</h3>
+          <figure class="finding-detail__media">
+            <img src="images/reviews/ivy-services.jpg" alt="Ivy Growth Group Services page service card grid" loading="lazy">
+          </figure>
+          <div class="finding-detail__block">
+            <span class="finding-detail__block-label"><svg class="finding-detail__block-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>Observation</span>
+            <p>The three core service pillars &mdash; Fractional Leadership, Consulting to Win Work, and Consulting to Increase Visibility &mdash; share an identical visual treatment, forcing users to read every description rather than scan for differences.</p>
+          </div>
+          <div class="finding-detail__block">
+            <span class="finding-detail__block-label"><svg class="finding-detail__block-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.3V17h6v-1.2c0-.9.4-1.7 1-2.3A6 6 0 0 0 12 3z"/></svg>Recommendation</span>
+            <p>Give each service category a unique visual anchor, such as an icon or subtle color-coding, so users can scan and compare offerings at a glance.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="step-section" id="step-recommendations">
+        <span class="step-current-label">03. Recommendations</span>
+        <h3>Proposed Fixes</h3>
+        <ol class="recommendation-list">
+          <li>Add a high-contrast active-state indicator to the primary navigation so users always know where they are on the site.</li>
+          <li>Add explicit required-field markers and real-time validation to the Connect contact form to prevent incomplete submissions.</li>
+          <li>Give each of the three service pillars a unique visual anchor, such as an icon or accent color, so users can scan and compare offerings at a glance.</li>
+          <li>Design a clear error / dead-end state with plain-language messaging and a path back to key pages.</li>
+        </ol>
+        <h3>Expected Impact</h3>
+        <p>Together, these changes reduce friction at the site&apos;s two most conversion-critical moments &mdash; service discovery and initial contact &mdash; helping more qualified visitors reach a completed inquiry without confusion or drop-off.</p>
+      </section>
+    </div>
+</div>
+
+<section class="work-intro">
+  <h2><span class="highlight">There's</span> more to explore</h2>
+  <p class="kicker">Check out other works by Orawan</p>
+  <div class="card-grid">
+    <!-- FAAC -->
+    <a class="project-card" href="../faac/index.html">
+      <div class="card-mockup-area card-mockup-area--image">
+        <img src="images/project-cards/faac-card.webp" alt="FAAC case-study hero mockup preview">
+      </div>
+      <p class="card-title">FAAC</p>
+      <p class="card-role">Web Design</p>
+    </a>
+    <!-- PrepMate -->
+    <a class="project-card" href="../prepmate/index.html">
+      <div class="card-mockup-area card-mockup-area--image">
+        <img src="images/project-cards/prepmate-card.webp" alt="PrepMate case-study hero mockup preview">
+      </div>
+      <p class="card-title">PrepMate</p>
+      <p class="card-role">UX/UI Case Study</p>
+    </a>
+    <!-- No Fuss Meal Plan -->
+    <a class="project-card" href="../no-fuss-meal-plan/index.html">
+      <div class="card-mockup-area card-mockup-area--image">
+        <img src="images/project-cards/nofussmealplan-card.webp" alt="No Fuss Meal Plan case-study hero mockup preview">
+      </div>
+      <p class="card-title">No Fuss Meal Plan</p>
+      <p class="card-role">UX/UI Case Study</p>
+    </a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="../../index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a>
+      <p class="footer-role">UX/UI Designer</p>
+    </div>
+    <div class="footer-links-col">
+      <ul class="footer-links">
+        <li><a href="../../work/index.html">Work</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../contact/index.html">Contact</a></li>
+      </ul>
+      <p class="footer-copyright">© 2026 Orawan. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var toggle = document.getElementById('theme-toggle');
+
+    try {
+      var saved = localStorage.getItem('theme');
+      if (saved === 'dark' || saved === 'light') { root.setAttribute('data-theme', saved); }
+    } catch (e) {}
+
+    function isDarkNow() {
+      return root.getAttribute('data-theme') === 'dark';
+    }
+
+    function updateLabel() {
+      toggle.textContent = isDarkNow() ? 'Light' : 'Dark';
+    }
+
+    toggle.addEventListener('click', function () {
+      var current = root.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : (current === 'light' ? null : 'dark');
+      if (next) { root.setAttribute('data-theme', next); } else { root.removeAttribute('data-theme'); }
+      try {
+        if (next) { localStorage.setItem('theme', next); } else { localStorage.removeItem('theme'); }
+      } catch (e) {}
+      updateLabel();
+    });
+
+    updateLabel();
+  })();
+</script>
+<script>
+  (function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll('.step-section'));
+    var navItems = document.querySelectorAll('.toc-item');
+    if (!sections.length || !navItems.length) return;
+
+    function setCurrent(key) {
+      navItems.forEach(function (el) {
+        el.classList.toggle('is-current', el.dataset.step === key);
+      });
+    }
+
+    function updateCurrent() {
+      var vh = window.innerHeight;
+      var bestSection = null;
+      var bestVisible = -1;
+      sections.forEach(function (section) {
+        var rect = section.getBoundingClientRect();
+        var visibleTop = Math.max(rect.top, 0);
+        var visibleBottom = Math.min(rect.bottom, vh);
+        var visible = Math.max(0, visibleBottom - visibleTop);
+        if (visible > bestVisible) {
+          bestVisible = visible;
+          bestSection = section;
+        }
+      });
+      if (bestSection && bestVisible > 0) {
+        setCurrent(bestSection.id.replace('step-', ''));
+      }
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          updateCurrent();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateCurrent();
+  })();
+</script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nu — UX/UI Designer</title>
+<title>Orawan — UX/UI Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,18 +22,6 @@
     --font-display: 'Fraunces', Georgia, serif;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --color-bg-base: #12181F;
-      --color-bg-muted: #1B222B;
-      --color-ink-900: #F7F8F6;
-      --color-ink-700: #DADFE3;
-      --color-ink-500: #9AA3AD;
-      --color-ink-300: #3A424C;
-      --color-white: #12181F;
-      /* --color-accent-terracotta / --color-accent-seafoam intentionally unchanged */
-    }
-  }
   :root[data-theme="dark"] {
     --color-bg-base: #12181F;
     --color-bg-muted: #1B222B;
@@ -51,9 +39,19 @@
   .site-nav { position: sticky; top: 0; z-index: 50; background: var(--color-bg-base); }
   .nav-inner { max-width: 1280px; margin: 0 auto; padding: 20px 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
   @media (min-width: 640px) { .nav-inner { padding: 24px 80px; } }
-  .logo-badge { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--color-ink-900); display: flex; align-items: center; justify-content: center; text-decoration: none; user-select: none; }
-  .logo-badge span { font-family: var(--font-sans); font-weight: 400; font-size: 13px; line-height: 1; color: var(--color-bg-base); }
-  .logo-badge:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  @media (max-width: 639px) { .nav-inner { grid-template-columns: 1fr auto; row-gap: 12px; } .nav-links { grid-column: 1 / -1; gap: 28px; } }
+  .wordmark { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
+  .wordmark:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .logo-badge { position: relative; flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; user-select: none; }
+  .logo-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .logo-badge span { position: relative; font-family: var(--font-sans); font-weight: 700; font-size: 14px; line-height: 1; letter-spacing: 1px; color: var(--color-bg-base); }
+  .logo-badge span .logo-o { color: var(--color-accent-terracotta); }
+  .logo-badge span .logo-a { color: var(--color-accent-seafoam); }
+  .wordmark-divider { width: 1px; height: 32px; background: var(--color-ink-300); flex: none; }
+  .wordmark-name { display: flex; flex-direction: column; gap: 2px; line-height: 1; }
+  .wordmark-name span { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 2px; color: var(--color-ink-900); }
+  .nav-brand { display: flex; flex-direction: column; align-items: center; gap: 8px; justify-self: start; }
+  .nav-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
   .nav-links { display: flex; align-items: center; gap: 36px; margin: 0; padding: 0; list-style: none; }
   .nav-links a { position: relative; font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; padding-bottom: 8px; }
   .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--color-ink-900); opacity: 0; transform: scaleX(0.4); transform-origin: left; transition: opacity .15s ease, transform .15s ease; }
@@ -66,149 +64,198 @@
   @media (min-width: 640px) { main { padding: 0 80px; } }
 
   /* ---------- Hero intro (approved Nav-component content block) ---------- */
-  .page-hero { padding: 64px 0 96px; }
-  .page-hero .eyebrow { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 20px; }
+  .page-hero { padding: 64px 0 24px; }
+  .page-hero .eyebrow { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 16px; }
   .page-hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.25rem, 1.6rem + 3.2vw, 4.5rem); letter-spacing: -0.5px; line-height: 1.15; color: var(--color-ink-900); margin: 0 0 24px; max-width: 16ch; text-wrap: balance; }
-  .page-hero p { font-size: 1rem; line-height: 1.6; color: var(--color-ink-700); max-width: 34rem; margin: 0; }
+  .page-hero .hero-kicker { display: flex; align-items: center; gap: 8px; margin-top: 32px; }
+  .hero-kicker .rule-vertical { width: 28px; height: 1px; background: var(--color-ink-500); flex: none; }
+  .hero-kicker span:last-child { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); }
 
   /* ---------- §6 Buttons (approved) ---------- */
-  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-ink-300); background: transparent; color: var(--color-ink-900); font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.5px; padding: 15px 28px; border-radius: 999px; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
+  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-ink-300); background: transparent; color: var(--color-ink-900); font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.5px; padding: 15px 28px; border-radius: 0; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
   .btn-ghost:hover { background: var(--color-ink-900); color: var(--color-bg-base); border-color: var(--color-ink-900); }
   .btn-ghost:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
 
-  /* ---------- Selected work section ---------- */
-  .section-label { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 8px; }
+  /* ---------- Selected Work — editorial list layout (updated from bordered card grid) ---------- */
+  .section-label { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; letter-spacing: -0.25px; color: var(--color-ink-900); margin: 0 0 24px; }
+  #work { padding-top: 24px; }
+  .work-list { display: flex; flex-direction: column; gap: 96px; margin: 0 0 48px; }
+  .work-item { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; text-decoration: none; color: inherit; }
+  .work-item .work-media { order: 1; }
+  .work-item .work-text { order: 2; }
+  .work-item.work-item--reverse { margin-top: 32px; }
+  .work-item.work-item--reverse .work-media { order: 2; }
+  .work-item.work-item--reverse .work-text { order: 1; }
+  .work-item:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 6px; }
+  @media (max-width: 767px) {
+    .work-list { gap: 64px; }
+    .work-item, .work-item.work-item--reverse { grid-template-columns: 1fr; gap: 24px; margin-top: 0; }
+    .work-item .work-media, .work-item.work-item--reverse .work-media { order: 1; }
+    .work-item .work-text, .work-item.work-item--reverse .work-text { order: 2; }
+  }
+  .work-number { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; letter-spacing: 1.5px; color: var(--color-ink-500); margin: 0 0 8px; }
+  .work-title { position: relative; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.75rem, 1.4rem + 1.8vw, 2.75rem); letter-spacing: -0.25px; color: var(--color-ink-900); margin: 0 0 12px; }
+  .work-title .highlight { position: relative; white-space: nowrap; }
+  .work-title .highlight::before { content: ""; position: absolute; left: -6%; width: clamp(80px, 112%, 160px); top: 50%; bottom: 0%; z-index: -1; background-repeat: no-repeat; background-size: 100% 100%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='r1' x='-15%25' y='-40%25' width='130%25' height='180%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.35' numOctaves='2' seed='11' result='edgeNoise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='edgeNoise' scale='11' xChannelSelector='R' yChannelSelector='G' result='displaced'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.18 0.5' numOctaves='2' seed='4' result='grain'/%3E%3CfeColorMatrix in='grain' type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.15 1.15 1.15 0 -0.22' result='grainAlpha'/%3E%3CfeComposite in='displaced' in2='grainAlpha' operator='in'/%3E%3C/filter%3E%3C/defs%3E%3Crect x='8' y='15' width='384' height='30' rx='4' fill='%23A8CFC3' filter='url(%23r1)'/%3E%3C/svg%3E"); }
+  .work-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0 0 16px; }
+  .work-description { font-size: 1rem; line-height: 1.6; color: var(--color-ink-700); max-width: 32rem; margin: 0; }
 
-  /* ---------- §6 Project card (approved) ---------- */
-  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin: 32px 0 96px; }
-  .project-card { display: flex; flex-direction: column; align-items: center; border: 1px solid var(--color-ink-300); border-radius: 2px; padding: 56px 40px 40px; text-decoration: none; color: inherit; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-  .project-card:hover { transform: translateY(-4px); border-color: var(--color-ink-900); box-shadow: 0 20px 36px -22px rgba(18, 24, 31, 0.35); }
-  .project-card:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 4px; }
-  .card-mockup-area { position: relative; width: 100%; height: 240px; margin-bottom: 36px; }
-  .card-device-monitor { position: absolute; left: 6%; top: 12%; width: 62%; transform: rotate(-3deg); z-index: 1; }
-  .card-monitor-screen { background: var(--color-ink-900); border-radius: 10px; padding: 8px 8px 16px; box-shadow: 0 24px 34px -20px rgba(18, 24, 31, 0.4); }
-  .card-monitor-stand { width: 30%; height: 10px; margin: 0 auto; background: var(--color-ink-900); border-radius: 0 0 4px 4px; }
-  .card-monitor-inner { background: var(--color-white); border-radius: 3px; aspect-ratio: 16/11; overflow: hidden; display: flex; flex-direction: column; }
-  .card-monitor-nav { height: 16%; background: var(--color-bg-muted); display: flex; align-items: center; gap: 4px; padding: 0 8%; flex: none; }
-  .card-monitor-nav span { width: 5px; height: 5px; border-radius: 50%; background: var(--color-ink-300); }
-  .card-monitor-content { flex: 1; display: flex; gap: 4%; padding: 8%; }
-  .card-monitor-block { flex: 1; border-radius: 3px; }
-  .card-device-phone-overlap { position: absolute; right: 2%; bottom: -6%; width: 26%; transform: rotate(7deg); z-index: 2; }
-  .card-device-phone-fan { position: absolute; width: 30%; top: 8%; }
-  .card-device-phone-fan.fan-1 { left: 4%; transform: rotate(-11deg); z-index: 1; }
-  .card-device-phone-fan.fan-2 { left: 35%; top: 0; transform: rotate(3deg); z-index: 3; }
-  .card-device-phone-fan.fan-3 { left: 66%; transform: rotate(12deg); z-index: 2; }
-  .card-phone-frame { background: var(--color-ink-900); border-radius: 16px; padding: 6px; box-shadow: 0 18px 28px -16px rgba(18, 24, 31, 0.4); }
-  .card-phone-screen { background: var(--color-white); border-radius: 11px; aspect-ratio: 9/18.5; position: relative; overflow: hidden; padding: 12% 10%; display: flex; flex-direction: column; gap: 8%; }
-  .card-phone-notch { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 26%; height: 3%; border-radius: 3px; background: var(--color-ink-300); }
-  .card-row-dot { display: flex; align-items: center; gap: 6%; }
-  .card-row-dot .dot { width: 16%; aspect-ratio: 1; border-radius: 50%; flex: none; }
-  .card-row-dot .line { height: 12%; border-radius: 2px; flex: 1; }
-  .card-phone-line { height: 8%; border-radius: 2px; }
-  .card-phone-fill { border-radius: 4px; flex: none; }
-  .card-phone-ring { width: 44%; aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--color-accent-terracotta); margin: auto; }
-  .card-title { font-family: var(--font-display); font-weight: 400; font-size: 1.625rem; color: var(--color-ink-900); margin: 0 0 12px; text-align: center; }
-  .card-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); margin: 0; text-align: center; }
+  /* ---------- Work mockup (device collage, scaled up — "work-" scoped separately from the Project card's "card-" versions) ---------- */
+  .work-mockup-area { position: relative; width: 100%; max-width: 440px; height: 340px; margin: 0 auto; }
+  .work-mockup-area--image { border-radius: 8px; overflow: hidden; background: var(--color-bg-base); }
+  .work-mockup-area--image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  /* Home page only — "My Work" mockups sized down ~15% vs. the shared component default (see brand guidelines) */
+  #work .work-mockup-area { max-width: 375px; height: 290px; }
+  .work-device-monitor { position: absolute; left: 4%; top: 8%; width: 66%; transform: rotate(-3deg); z-index: 1; }
+  .work-monitor-screen { background: var(--color-ink-900); border-radius: 12px; padding: 10px 10px 20px; box-shadow: 0 28px 40px -22px rgba(18, 24, 31, 0.4); }
+  .work-monitor-stand { width: 30%; height: 12px; margin: 0 auto; background: var(--color-ink-900); border-radius: 0 0 5px 5px; }
+  .work-monitor-inner { background: var(--color-white); border-radius: 4px; aspect-ratio: 16/11; overflow: hidden; display: flex; flex-direction: column; }
+  .work-monitor-nav { height: 16%; background: var(--color-bg-muted); display: flex; align-items: center; gap: 5px; padding: 0 8%; flex: none; }
+  .work-monitor-nav span { width: 6px; height: 6px; border-radius: 50%; background: var(--color-ink-300); }
+  .work-monitor-content { flex: 1; display: flex; gap: 4%; padding: 8%; }
+  .work-monitor-block { flex: 1; border-radius: 4px; }
+  .work-device-phone-overlap { position: absolute; right: 0%; bottom: -8%; width: 28%; transform: rotate(7deg); z-index: 2; }
+  .work-device-phone-fan { position: absolute; width: 32%; top: 6%; }
+  .work-device-phone-fan.fan-1 { left: 2%; top: 18%; transform: rotate(-13deg); z-index: 1; }
+  .work-device-phone-fan.fan-2 { left: 34%; top: 0%; transform: rotate(3deg); z-index: 3; }
+  .work-device-phone-fan.fan-3 { left: 66%; top: 18%; transform: rotate(13deg); z-index: 2; }
+  .work-phone-frame { background: var(--color-ink-900); border-radius: 18px; padding: 7px; box-shadow: 0 22px 34px -18px rgba(18, 24, 31, 0.4); }
+  .work-phone-screen { background: var(--color-white); border-radius: 13px; aspect-ratio: 9/18.5; position: relative; overflow: hidden; padding: 12% 10%; display: flex; flex-direction: column; gap: 8%; }
+  .work-phone-notch { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); width: 26%; height: 3%; border-radius: 3px; background: var(--color-ink-300); }
+  .work-row-dot { display: flex; align-items: center; gap: 6%; }
+  .work-row-dot .dot { width: 16%; aspect-ratio: 1; border-radius: 50%; flex: none; }
+  .work-row-dot .line { height: 12%; border-radius: 2px; flex: 1; }
+  .work-phone-line { height: 8%; border-radius: 2px; }
+  .work-phone-fill { border-radius: 4px; flex: none; }
+  .work-phone-ring { width: 44%; aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--color-accent-terracotta); margin: auto; }
 
   /* ---------- Contact section (approved Nav-component placeholder, real copy) ---------- */
   .contact-section { padding: 0 0 120px; border-top: 1px solid var(--color-ink-300); padding-top: 80px; }
   .contact-section h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.75rem, 1.4rem + 2vw, 3rem); letter-spacing: -0.25px; line-height: 1.15; color: var(--color-ink-900); margin: 0 0 20px; }
   .contact-section p { font-size: 1rem; line-height: 1.6; color: var(--color-ink-700); max-width: 34rem; margin: 0 0 32px; }
 
+  /* ---------- Contact form (new, Oct 2026 — mailto-based, no backend) ---------- */
+  .contact-form { max-width: 34rem; display: flex; flex-direction: column; gap: 24px; }
+  .contact-field { display: flex; flex-direction: column; gap: 8px; }
+  .contact-field label { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-ink-500); }
+  .contact-field input, .contact-field textarea { font-family: var(--font-sans); font-size: 1rem; color: var(--color-ink-900); background: var(--color-bg-muted); border: 1px solid var(--color-ink-300); border-radius: 0; padding: 12px 14px; }
+  .contact-field textarea { resize: vertical; min-height: 120px; }
+  .contact-field input:focus-visible, .contact-field textarea:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 2px; }
+  .contact-form-error { font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; color: var(--color-accent-terracotta); margin: 0; }
+  .contact-form .btn-ghost { align-self: flex-start; }
+  .contact-form .btn-ghost:disabled { opacity: .6; cursor: default; }
+  .contact-status { font-family: var(--font-sans); font-size: 0.9375rem; line-height: 1.6; color: var(--color-ink-700); margin: 0; padding: 16px 18px; border: 1px solid var(--color-accent-seafoam); background: var(--color-bg-muted); }
+  .contact-status a { color: var(--color-ink-900); }
+  .contact-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
   /* ---------- Theme toggle (approved — appears on every §6 component artifact) ---------- */
   .theme-toggle { justify-self: center; font-family: var(--font-sans); font-weight: 500; font-size: 0.8125rem; color: var(--color-ink-900); background: var(--color-bg-muted); border: 1px solid var(--color-ink-300); border-radius: 20px; padding: 8px 16px; cursor: pointer; }
   .theme-toggle:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 2px; }
+
+  /* ---------- Footer (approved — appears on every page) ---------- */
+  .site-footer { border-top: 1px solid var(--color-ink-300); padding: 64px 0; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; align-items: last baseline; gap: 48px; flex-wrap: wrap; }
+  @media (min-width: 640px) { .footer-inner { padding: 0 80px; } }
+  .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: 280px; }
+  .footer-role { font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; line-height: 1; color: var(--color-ink-500); margin: 0; }
+  .footer-links-col { display: flex; flex-direction: column; }
+  .footer-links { display: flex; flex-direction: row; gap: 24px; margin: 0; padding: 0; list-style: none; }
+  .footer-links a { font-family: var(--font-sans); font-weight: 500; font-size: 0.9375rem; color: var(--color-ink-900); text-decoration: none; }
+  .footer-links a:hover { text-decoration: underline; }
+  .footer-links a:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 3px; }
+  .footer-copyright { font-family: var(--font-sans); font-weight: 400; font-size: 0.8125rem; color: var(--color-ink-500); margin: 24px 0 0; }
+  @media (max-width: 767px) {
+    .site-footer { padding: 48px 0; }
+    .footer-inner { gap: 24px; }
+    .footer-copyright { margin-top: 16px; }
+  }
 </style>
 </head>
 <body>
 
 <header class="site-nav">
   <div class="nav-inner">
-    <a class="logo-badge" href="index.html" aria-label="Nu — home"><span>nu</span></a>
+    <div class="nav-brand"><a class="wordmark" href="index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a><p class="nav-role">UX/UI Designer</p></div>
     <button class="theme-toggle" id="theme-toggle" type="button">Dark</button>
     <ul class="nav-links">
-      <li><a href="index.html" class="is-active">Work</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="work/index.html">Work</a></li>
+      <li><a href="about/index.html">About</a></li>
+      <li><a href="contact/index.html">Contact</a></li>
     </ul>
   </div>
 </header>
 
 <main>
   <section class="page-hero">
-    <p class="eyebrow">UX/UI Designer — Branding</p>
-    <h1>Hi, I'm Nu.<br>I design calm, human software.</h1>
-    <p>Selected case studies below — a mix of consumer product and branding work, built around the same calm, editorial design system throughout.</p>
+    <p class="eyebrow">UX/UI Designer — Available for Work</p>
+    <h1>Hi, I'm Orawan,<br>creating empathetic human-centered solutions.</h1>
+    <div class="hero-kicker">
+      <span class="rule-vertical"></span>
+      <span>My Work</span>
+    </div>
   </section>
 
   <section id="work">
-    <p class="section-label">Selected Work</p>
-    <div class="card-grid">
-      <!-- Mirror -->
-      <a class="project-card" href="#">
-        <div class="card-mockup-area">
-          <div class="card-device-monitor">
-            <div class="card-monitor-screen">
-              <div class="card-monitor-inner">
-                <div class="card-monitor-nav"><span></span><span></span><span></span></div>
-                <div class="card-monitor-content">
-                  <div class="card-monitor-block" style="background: var(--color-accent-seafoam);"></div>
-                  <div class="card-monitor-block" style="background: var(--color-bg-muted);"></div>
-                </div>
-              </div>
-            </div>
-            <div class="card-monitor-stand"></div>
-          </div>
-          <div class="card-device-phone-overlap">
-            <div class="card-phone-frame">
-              <div class="card-phone-screen">
-                <span class="card-phone-notch"></span>
-                <div class="card-phone-fill" style="height: 34%; background: var(--color-bg-muted); margin-top: 10%;"></div>
-                <div class="card-phone-line" style="width: 70%; background: var(--color-ink-300);"></div>
-                <div class="card-phone-line" style="width: 45%; background: var(--color-ink-300);"></div>
-              </div>
-            </div>
+    <div class="work-list">
+
+      <!-- 01 No Fuss Meal Plan -->
+      <a class="work-item work-item--reverse" href="case-studies/no-fuss-meal-plan/index.html">
+        <div class="work-media">
+          <div class="work-mockup-area work-mockup-area--image">
+            <img src="images/project-cards/nofussmealplan-card.webp" alt="No Fuss Meal Plan case-study hero preview">
           </div>
         </div>
-        <p class="card-title">Mirror</p>
-        <p class="card-role">UX/UI Designer, Branding</p>
+        <div class="work-text">
+          <p class="work-number">01</p>
+          <h3 class="work-title"><span class="highlight">No Fuss Meal Plan</span></h3>
+          <p class="work-role">UX Research, Case Study</p>
+          <p class="work-description">A streamlined meal-planning experience for busy users — from quick onboarding to weekly plans and grocery-ready lists — designed to reduce decision fatigue and keep healthy eating realistic.</p>
+        </div>
       </a>
 
-      <!-- LikeHer -->
-      <a class="project-card" href="case-study.html">
-        <div class="card-mockup-area">
-          <div class="card-device-phone-fan fan-1">
-            <div class="card-phone-frame">
-              <div class="card-phone-screen">
-                <span class="card-phone-notch"></span>
-                <div class="card-row-dot" style="margin-top: 14%;"><span class="dot" style="background: var(--color-accent-terracotta);"></span><span class="line" style="background: var(--color-ink-300);"></span></div>
-                <div class="card-row-dot"><span class="dot" style="background: var(--color-ink-300);"></span><span class="line" style="background: var(--color-ink-300);"></span></div>
-                <div class="card-row-dot"><span class="dot" style="background: var(--color-ink-300);"></span><span class="line" style="background: var(--color-ink-300);"></span></div>
-              </div>
-            </div>
-          </div>
-          <div class="card-device-phone-fan fan-2">
-            <div class="card-phone-frame">
-              <div class="card-phone-screen">
-                <span class="card-phone-notch"></span>
-                <div class="card-phone-line" style="width: 60%; background: var(--color-ink-300); margin-top: 22%;"></div>
-                <div class="card-phone-fill" style="height: 10%; background: var(--color-bg-muted);"></div>
-                <div class="card-phone-fill" style="height: 10%; background: var(--color-bg-muted);"></div>
-                <div class="card-phone-fill" style="height: 10%; background: var(--color-accent-terracotta); margin-top: auto;"></div>
-              </div>
-            </div>
-          </div>
-          <div class="card-device-phone-fan fan-3">
-            <div class="card-phone-frame">
-              <div class="card-phone-screen">
-                <span class="card-phone-notch"></span>
-                <div class="card-phone-ring"></div>
-              </div>
-            </div>
+      <!-- 02 Ivy Growth Group -->
+      <a class="work-item" href="case-studies/ivy-growth-group/index.html">
+        <div class="work-media">
+          <div class="work-mockup-area work-mockup-area--image">
+            <img src="images/project-cards/ivygrowthgroup-card.webp" alt="Ivy Growth Group case-study hero preview">
           </div>
         </div>
-        <p class="card-title">LikeHer</p>
-        <p class="card-role">UX/UI Designer, Branding</p>
+        <div class="work-text">
+          <p class="work-number">02</p>
+          <h3 class="work-title"><span class="highlight">Ivy Growth Group</span></h3>
+          <p class="work-role">Heuristic Review</p>
+          <p class="work-description">A heuristic evaluation of the Ivy Growth Group marketing site against Nielsen's usability heuristics, surfacing fixes to navigation feedback, form validation, and error recovery.</p>
+        </div>
+      </a>
+
+      <!-- 03 PrepMate -->
+      <a class="work-item work-item--reverse" href="case-studies/prepmate/index.html">
+        <div class="work-media">
+          <div class="work-mockup-area work-mockup-area--image">
+            <img src="images/project-cards/prepmate-card.webp" alt="PrepMate case-study hero preview">
+          </div>
+        </div>
+        <div class="work-text">
+          <p class="work-number">03</p>
+          <h3 class="work-title"><span class="highlight">PrepMate</span></h3>
+          <p class="work-role">UX/UI Designer, Case Study</p>
+          <p class="work-description">A mobile app that turns emergency preparedness from a daunting, fear-driven task into a structured, achievable process — guiding people through a personalized plan instead of a generic checklist.</p>
+        </div>
+      </a>
+
+      <!-- 04 FAAC -->
+      <a class="work-item" href="case-studies/faac/index.html">
+        <div class="work-media">
+          <div class="work-mockup-area work-mockup-area--image">
+            <img src="images/project-cards/faac-card.webp" alt="FAAC case-study hero preview">
+          </div>
+        </div>
+        <div class="work-text">
+          <p class="work-number">04</p>
+          <h3 class="work-title"><span class="highlight">FAAC</span></h3>
+          <p class="work-role">Web Design</p>
+          <p class="work-description">A website redesign for the Fine Arts Advisory Council that replaces a cluttered, unresponsive layout with streamlined navigation and clear calls to action — making it effortless for parents, teachers, donors, and volunteers to get involved.</p>
+        </div>
       </a>
     </div>
   </section>
@@ -216,24 +263,80 @@
   <section id="contact" class="contact-section">
     <h2>Contact</h2>
     <p>Interested in working together, or just want to say hello? Reach out — I'd love to hear from you.</p>
-    <a class="btn-ghost" href="mailto:hello@example.com">Say Hello</a>
+    <form class="contact-form" id="contact-form" novalidate>
+      <input type="checkbox" name="botcheck" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="contact-field">
+        <label for="contact-name">Name</label>
+        <input type="text" id="contact-name" name="name" required>
+      </div>
+      <div class="contact-field">
+        <label for="contact-email">Email</label>
+        <input type="email" id="contact-email" name="email" required>
+      </div>
+      <div class="contact-field">
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" name="message" rows="5" required></textarea>
+      </div>
+      <p class="contact-form-error" id="contact-form-error" hidden></p>
+      <p class="contact-status" id="contact-status" role="status" hidden></p>
+      <button type="submit" class="btn-ghost">Send</button>
+    </form>
   </section>
 </main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="wordmark" href="index.html" aria-label="Orawan Anuntakul — home"><span class="logo-badge"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="34" r="27" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="30" cy="29" r="25" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="34" cy="31" r="23" fill="none" stroke="var(--color-accent-seafoam)" stroke-width="0.875"/><circle cx="29" cy="33" r="21" fill="none" stroke="var(--color-accent-terracotta)" stroke-width="0.875"/><circle cx="32" cy="32" r="17" fill="var(--color-ink-900)"/></svg><span><span class="logo-o">O</span><span class="logo-a">A</span></span></span><span class="wordmark-divider"></span><span class="wordmark-name"><span>ORAWAN</span><span>ANUNTAKUL</span></span></a>
+      <p class="footer-role">UX/UI Designer</p>
+    </div>
+    <div class="footer-links-col">
+      <ul class="footer-links">
+        <li><a href="work/index.html">Work</a></li>
+        <li><a href="about/index.html">About</a></li>
+        <li><a href="contact/index.html">Contact</a></li>
+      </ul>
+      <p class="footer-copyright">© 2026 Orawan. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
 
 <script>
   (function () {
     var root = document.documentElement;
     var toggle = document.getElementById('theme-toggle');
 
+    function getUrlTheme() {
+      var params = new URLSearchParams(window.location.search);
+      var t = params.get('theme');
+      return (t === 'dark' || t === 'light') ? t : null;
+    }
+
+    var urlTheme = getUrlTheme();
+    if (urlTheme) { root.setAttribute('data-theme', urlTheme); }
+
     function isDarkNow() {
-      var attr = root.getAttribute('data-theme');
-      if (attr === 'dark') return true;
-      if (attr === 'light') return false;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return root.getAttribute('data-theme') === 'dark';
     }
 
     function updateLabel() {
       toggle.textContent = isDarkNow() ? 'Light' : 'Dark';
+    }
+
+    function propagateTheme() {
+      var current = root.getAttribute('data-theme');
+      var links = document.querySelectorAll('a[href^="https://claude.ai"]');
+      links.forEach(function (a) {
+        try {
+          var url = new URL(a.getAttribute('href'), window.location.href);
+          if (current === 'dark' || current === 'light') {
+            url.searchParams.set('theme', current);
+          } else {
+            url.searchParams.delete('theme');
+          }
+          a.setAttribute('href', url.toString());
+        } catch (e) {}
+      });
     }
 
     toggle.addEventListener('click', function () {
@@ -246,9 +349,75 @@
         root.setAttribute('data-theme', 'dark');
       }
       updateLabel();
+      propagateTheme();
     });
 
     updateLabel();
+    propagateTheme();
+  })();
+</script>
+
+<script>
+  (function () {
+    var form = document.getElementById('contact-form');
+    var errorEl = document.getElementById('contact-form-error');
+    var status = document.getElementById('contact-status');
+    var WEB3FORMS_KEY = '90c31482-4c5a-444f-b374-a2e8bb918867'; // from web3forms.com — safe to keep in the page
+
+    function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return '&#' + c.charCodeAt(0) + ';'; }); }
+    function sendMessage(name, email, message, button, onDone) {
+      var subject = 'Portfolio contact from ' + name;
+      if (WEB3FORMS_KEY.indexOf('PASTE_') === 0) {
+        // No key yet: fall back to opening an email draft.
+        var body = message + '\n\n— ' + name + ' (' + email + ')';
+        window.location.href = 'mailto:orawannwcoders@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        onDone('draft');
+        return;
+      }
+      var hp = form.querySelector('input[name="botcheck"]');
+      if (hp && hp.checked) { onDone('sent'); return; }
+      var label = button.textContent;
+      button.disabled = true; button.textContent = 'Sending…';
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: subject, from_name: 'Orawan portfolio', name: name, email: email, message: message })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { onDone(d && d.success ? 'sent' : 'error'); })
+        .catch(function () { onDone('error'); })
+        .then(function () { button.disabled = false; button.textContent = label; });
+    }
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var name = document.getElementById('contact-name').value.trim();
+      var email = document.getElementById('contact-email').value.trim();
+      var message = document.getElementById('contact-message').value.trim();
+
+      if (!name || !email || !message) {
+        errorEl.textContent = 'Please fill in your name, email, and message.';
+        errorEl.hidden = false;
+        return;
+      }
+
+      if (!emailPattern.test(email)) {
+        errorEl.textContent = 'Please enter a valid email address.';
+        errorEl.hidden = false;
+        return;
+      }
+
+      errorEl.hidden = true;
+      status.hidden = true;
+      sendMessage(name, email, message, form.querySelector('button[type="submit"]'), function (result) {
+        if (result === 'sent') { status.innerHTML = 'Thanks, ' + esc(name) + '! Your message was sent — I\'ll get back to you soon.'; form.reset(); }
+        else if (result === 'draft') { status.innerHTML = 'Your email app should open with your message ready to send. If nothing happens, email me directly at <a href="mailto:orawannwcoders@gmail.com">orawannwcoders@gmail.com</a>.'; }
+        else { status.innerHTML = 'Sorry, your message couldn\'t be sent. Please email me directly at <a href="mailto:orawannwcoders@gmail.com">orawannwcoders@gmail.com</a>.'; }
+        status.hidden = false;
+      });
+    });
   })();
 </script>
 
