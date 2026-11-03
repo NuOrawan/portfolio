@@ -19,6 +19,7 @@
     --color-ink-300: #B7BEC6;
     --color-accent-terracotta: #D99A7C;
     --color-accent-seafoam: #A8CFC3;
+    --color-error: #C62828;
     --font-display: 'Fraunces', Georgia, serif;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
@@ -30,6 +31,7 @@
     --color-ink-500: #9AA3AD;
     --color-ink-300: #3A424C;
     --color-white: #12181F;
+    --color-error: #FF7A7A;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--color-bg-base); color: var(--color-ink-700); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
@@ -141,7 +143,10 @@
   .contact-field input, .contact-field textarea { font-family: var(--font-sans); font-size: 1rem; color: var(--color-ink-900); background: var(--color-bg-muted); border: 1px solid var(--color-ink-300); border-radius: 0; padding: 12px 14px; }
   .contact-field textarea { resize: vertical; min-height: 120px; }
   .contact-field input:focus-visible, .contact-field textarea:focus-visible { outline: 2px solid var(--color-accent-terracotta); outline-offset: 2px; }
-  .contact-form-error { font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; color: var(--color-accent-terracotta); margin: 0; }
+  .contact-form .contact-required-note { font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-ink-500); margin: 0; }
+  .contact-required { color: var(--color-error); margin-left: 2px; }
+  .contact-field.has-error input, .contact-field.has-error textarea { border-color: var(--color-error); }
+  .contact-form .contact-field-error { font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; color: var(--color-error); margin: 0; }
   .contact-form .btn-ghost { align-self: flex-start; }
   .contact-form .btn-ghost:disabled { opacity: .6; cursor: default; }
   .contact-status { font-family: var(--font-sans); font-size: 0.9375rem; line-height: 1.6; color: var(--color-ink-700); margin: 0; padding: 16px 18px; border: 1px solid var(--color-accent-seafoam); background: var(--color-bg-muted); }
@@ -265,19 +270,22 @@
     <p>Interested in working together, or just want to say hello? Reach out — I'd love to hear from you.</p>
     <form class="contact-form" id="contact-form" novalidate>
       <input type="checkbox" name="botcheck" class="contact-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-      <div class="contact-field">
-        <label for="contact-name">Name</label>
-        <input type="text" id="contact-name" name="name" required>
+      <p class="contact-required-note">All fields are required.</p>
+      <div class="contact-field" data-field="name">
+        <label for="contact-name">Name<span class="contact-required" aria-hidden="true">*</span></label>
+        <input type="text" id="contact-name" name="name" autocomplete="name" required aria-describedby="err-name">
+        <p class="contact-field-error" id="err-name" hidden></p>
       </div>
-      <div class="contact-field">
-        <label for="contact-email">Email</label>
-        <input type="email" id="contact-email" name="email" required>
+      <div class="contact-field" data-field="email">
+        <label for="contact-email">Email<span class="contact-required" aria-hidden="true">*</span></label>
+        <input type="email" id="contact-email" name="email" autocomplete="email" required aria-describedby="err-email">
+        <p class="contact-field-error" id="err-email" hidden></p>
       </div>
-      <div class="contact-field">
-        <label for="contact-message">Message</label>
-        <textarea id="contact-message" name="message" rows="5" required></textarea>
+      <div class="contact-field" data-field="message">
+        <label for="contact-message">Message<span class="contact-required" aria-hidden="true">*</span></label>
+        <textarea id="contact-message" name="message" rows="5" required aria-describedby="err-message"></textarea>
+        <p class="contact-field-error" id="err-message" hidden></p>
       </div>
-      <p class="contact-form-error" id="contact-form-error" hidden></p>
       <p class="contact-status" id="contact-status" role="status" hidden></p>
       <button type="submit" class="btn-ghost">Send</button>
     </form>
@@ -360,9 +368,9 @@
 <script>
   (function () {
     var form = document.getElementById('contact-form');
-    var errorEl = document.getElementById('contact-form-error');
     var status = document.getElementById('contact-status');
     var WEB3FORMS_KEY = '90c31482-4c5a-444f-b374-a2e8bb918867'; // from web3forms.com — safe to keep in the page
+    var pageLoadedAt = Date.now();
 
     function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return '&#' + c.charCodeAt(0) + ';'; }); }
     function sendMessage(name, email, message, button, onDone) {
@@ -374,14 +382,15 @@
         onDone('draft');
         return;
       }
+      // Robot checks: the hidden trap field, and forms sent faster than a person could type.
       var hp = form.querySelector('input[name="botcheck"]');
-      if (hp && hp.checked) { onDone('sent'); return; }
+      if ((hp && hp.checked) || Date.now() - pageLoadedAt < 3000) { onDone('sent'); return; }
       var label = button.textContent;
       button.disabled = true; button.textContent = 'Sending…';
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: subject, from_name: 'Orawan portfolio', name: name, email: email, message: message })
+        body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: subject, from_name: 'Orawan portfolio', name: name, email: email, message: message, botcheck: !!(hp && hp.checked) })
       })
         .then(function (r) { return r.json(); })
         .then(function (d) { onDone(d && d.success ? 'sent' : 'error'); })
@@ -389,27 +398,49 @@
         .then(function () { button.disabled = false; button.textContent = label; });
     }
     var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var messages = {
+      name: function (v) { return v ? '' : 'Please enter your name.'; },
+      email: function (v) { return !v ? 'Please enter your email address.' : (emailPattern.test(v) ? '' : 'Please enter a valid email address.'); },
+      message: function (v) { return v ? '' : 'Please write a message.'; }
+    };
+
+    function setError(field, msg) {
+      var wrap = form.querySelector('[data-field="' + field + '"]');
+      var err = document.getElementById('err-' + field);
+      var input = wrap.querySelector('input, textarea');
+      if (msg) {
+        err.textContent = msg; err.hidden = false;
+        wrap.classList.add('has-error'); input.setAttribute('aria-invalid', 'true');
+      } else {
+        err.textContent = ''; err.hidden = true;
+        wrap.classList.remove('has-error'); input.removeAttribute('aria-invalid');
+      }
+    }
+    function check(field) {
+      var v = document.getElementById('contact-' + field).value.trim();
+      var msg = messages[field](v);
+      setError(field, msg);
+      return !msg;
+    }
+
+    // Live feedback: check a field when the visitor leaves it (if they typed something),
+    // and clear an error as soon as they fix it.
+    ['name', 'email', 'message'].forEach(function (field) {
+      var input = document.getElementById('contact-' + field);
+      input.addEventListener('blur', function () { if (input.value.trim()) check(field); });
+      input.addEventListener('input', function () {
+        if (input.closest('.contact-field').classList.contains('has-error')) check(field);
+      });
+    });
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-
       var name = document.getElementById('contact-name').value.trim();
       var email = document.getElementById('contact-email').value.trim();
       var message = document.getElementById('contact-message').value.trim();
+      var ok = [check('name'), check('email'), check('message')].every(Boolean);
 
-      if (!name || !email || !message) {
-        errorEl.textContent = 'Please fill in your name, email, and message.';
-        errorEl.hidden = false;
-        return;
-      }
-
-      if (!emailPattern.test(email)) {
-        errorEl.textContent = 'Please enter a valid email address.';
-        errorEl.hidden = false;
-        return;
-      }
-
-      errorEl.hidden = true;
+      if (!ok) { status.hidden = true; var first = form.querySelector('.has-error input, .has-error textarea'); if (first) first.focus(); return; }
       status.hidden = true;
       sendMessage(name, email, message, form.querySelector('button[type="submit"]'), function (result) {
         if (result === 'sent') { status.innerHTML = 'Thanks, ' + esc(name) + '! Your message was sent — I\'ll get back to you soon.'; form.reset(); }
